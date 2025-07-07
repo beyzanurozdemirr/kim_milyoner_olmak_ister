@@ -247,64 +247,65 @@ class SecondWindow(QWidget):
         self.baraj_sorulari = [1, 6, 11]  #2, 7, 12.sorular
 
         #Sorular
-        self.kolay_sorular = [ #17 soru
-            {"soru": "Halk arasında kullanılan ifadeye göre çok fikir değiştiren insanların hangisi gibi renkten renge girdiği söylenir? ", "secenekler": ["Şempanze gibi", "Bukalemun gibi", "Bizon gibi", "Komodo ejderi gibi"], "dogru": "B"},
-            {"soru": "Dünyanın en büyük okyanusu hangisidir?", "secenekler": ["Atlantik", "Hint", "Pasifik", "Arktik"], "dogru": "C"},
-            {"soru": "DNA'nın açılımı nedir?", "secenekler": ["Deoksiribonükleik Asit", "Dijital Nükleer Asit", "Dinamik Nöroaktif Asit", "Diyot Nöron Aktarıcı"], "dogru": "A"},
+        self.seviye1_sorular = [
+            {"soru": "Halk arasında kullanılan ifadeye göre çok fikir değiştiren insanların hangisi gibi renkten renge girdiği söylenir?", "secenekler": ["Şempanze gibi", "Bukalemun gibi", "Bizon gibi", "Komodo ejderi gibi"], "dogru": "B"},
             {"soru": "Her takımın her maçın başlangıcında sahada kaç futbolcusu olmalıdır?", "secenekler": ["8", "9", "10", "11"], "dogru": "D"},
-            {"soru": "Kahveye batırılmış kedi dili bisküvileri ve mascarpone peyniri ile yapılan İtalyan tatlısının adı nedir?", "secenekler": ["Kedi Pastası", "Trileçe", "Cheescake", "Tiramisu"], "dogru": "D"},
-            {"soru": "Hangi organın dört odası vardır?", "secenekler": ["Kalp", "Mide", "Akciğer", "Karaciğer"], "dogru": "A"},
-            {"soru": "Halk arasında 'göz değmesini önlemek' amacıyla yaygın olarak kullanılan bir nesnedir?", "secenekler": ["Çan", "Nazar boncuğu", "Tespih", "Anahtar"], "dogru": "B"},
             {"soru": "Güneş'e en yakın gezegen hangisidir?", "secenekler": ["Venüs", "Merkür", "Mars", "Dünya"], "dogru": "B"},
-            {"soru": "En uzun nehir hangisidir?", "secenekler": ["Nil", "Amazon", "Yangtze", "Mississippi"], "dogru": "A"},
-            {"soru": "Işık hızı saniyede kaç kilometredir?", "secenekler": ["300,000 km/s", "150,000 km/s", "1,000,000 km/s", "500,000 km/s"], "dogru": "A"},
             {"soru": "Türkiye kaç coğrafi bölgeden oluşur?", "secenekler": ["6", "7", "8", "5"], "dogru": "B"},
             {"soru": "En küçük asal sayı kaçtır?", "secenekler": ["0", "1", "2", "3"], "dogru": "C"},
-            {"soru": "En büyük iç deniz hangisidir?", "secenekler": ["Akdeniz", "Karadeniz", "Hazar Denizi", "Baltık Denizi"], "dogru": "C"},
-            {"soru": "İlk çağda yazıyı bulan medeniyet hangisidir?", "secenekler": ["Sümerler", "Hititler", "Urartular", "Asurlar"], "dogru": "A"},
             {"soru": "Elektrik akımının birimi nedir?", "secenekler": ["Volt", "Amper", "Watt", "Ohm"], "dogru": "B"},
-            {"soru": "En uzun süre tahtta kalan Osmanlı padişahı kimdir?", "secenekler": ["III. Mehmet", "IV. Murat", "Kanuni Sultan Süleyman", "II. Abdülhamid"], "dogru": "C"},
-            {"soru": "İlk Türk kadın romancı kimdir?", "secenekler": ["Halide Edip Adıvar", "Fatma Aliye Topuz", "Nezihe Muhiddin", "Afife Jale"], "dogru": "B"}, # Yeni kolay soru
+            {"soru": "Halk arasında 'göz değmesini önlemek' amacıyla yaygın olarak kullanılan bir nesnedir?", "secenekler": ["Çan", "Nazar boncuğu", "Tespih", "Anahtar"], "dogru": "B"},
+            {"soru": "Hangi organın dört odası vardır?", "secenekler": ["Kalp", "Mide", "Akciğer", "Karaciğer"], "dogru": "A"},
+        ] 
+
+        self.seviye2_sorular = [
+            {"soru": "DNA'nın açılımı nedir?", "secenekler": ["Deoksiribonükleik Asit", "Dijital Nükleer Asit", "Dinamik Nöroaktif Asit", "Diyot Nöron Aktarıcı"], "dogru": "A"},
+            {"soru": "Kahveye batırılmış kedi dili bisküvileri ve mascarpone peyniri ile yapılan İtalyan tatlısının adı nedir?", "secenekler": ["Kedi Pastası", "Trileçe", "Cheescake", "Tiramisu"], "dogru": "D"},
+            {"soru": "Dünyanın en büyük okyanusu hangisidir?", "secenekler": ["Atlantik", "Hint", "Pasifik", "Arktik"], "dogru": "C"},
+            {"soru": "Fatih Sultan Mehmet’in babası kimdir?", "secenekler": ["I.Mehmet", "II.Murad", "II.Mehmet", "Yıldırım Beyazıt"], "dogru": "B"},
+            {"soru": "En uzun nehir hangisidir?", "secenekler": ["Nil", "Amazon", "Yangtze", "Mississippi"], "dogru": "A"},
+            {"soru": "İlk çağda yazıyı bulan medeniyet hangisidir?", "secenekler": ["Sümerler", "Hititler", "Urartular", "Asurlar"], "dogru": "A"},
         ]
 
-        self.orta_sorular = [ #17 soru
+        self.seviye3_sorular = [
             {"soru": "İnternetin mucidi kimdir?", "secenekler": ["Tim Berners-Lee", "Bill Gates", "Steve Jobs", "Alan Turing"], "dogru": "A"},
-            {"soru": "Fatih Sultan Mehmeti'in babası kimdir?", "secenekler": ["I.Mehmet", "II.Murad", "II.Mehmet", "Yıldırım Beyazıt"], "dogru": "B"},
-            {"soru": "Türkiye'nin en uzun nehri hangisidir?", "secenekler": ["Kızılırmak", "Fırat", "Dicle", "Yeşilırmak"], "dogru": "A"},
             {"soru": "Divan-ı Lügatit Türk adlı eserin yazarı kimdir?", "secenekler": ["Kaşgarlı Mahmut", "Yusuf Has Hacip", "Ali Şir Nevai", "Ahmet Yesevi"], "dogru": "A"},
-            {"soru": "Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanılır?", "secenekler": ["Sabırsızlık", "Direnç", "Hız", "Uyum"], "dogru": "B"},
-            {"soru": "Kuzey Işıkları olarak bilinen doğa olayı hangi gezegenin manyetik alanıyla ilgilidir?", "secenekler": ["Mars", "Merkür", "Dünya", "Uranüs"], "dogru": "C"},
-            {"soru": "Porsche logosunda hangi hayvan görülebilir?", "secenekler": ["Aslan", "Kaplan", "Boğa", "At"], "dogru": "D"},
-            {"soru": "Hattat ne iş yapar?", "secenekler": ["Halı dokur", "Yazı yazar", "Seramik yapar", "Taş işler"], "dogru": "B"},
-            {"soru": "Hangisi Türkiye'de UNESCO Dünya Mirası Listesi'nde yer alan bir antik kenttir?", "secenekler": ["Çatalhöyük", "Ani Harabeleri", "Göbekli Tepe", "Hepsi"], "dogru": "D"},
-            {"soru": "Dünyanın en kalabalık ikinci ülkesi hangisidir?", "secenekler": ["Çin", "Hindistan", "ABD", "Endonezya"], "dogru": "B"},
-            {"soru": "Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir", "secenekler": ["Mekanik", "Termodinamik", "Kuantum Fiziği", "Optik"], "dogru": "C"},
+            {"soru": "Türkiye'nin en uzun nehri hangisidir?", "secenekler": ["Kızılırmak", "Fırat", "Dicle", "Yeşilırmak"], "dogru": "A"},
             {"soru": "Yunan mitolojisinde tanrıların kralı kimdir?", "secenekler": ["Eros", "Zeus", "İlyada", "Herkül"], "dogru": "B"},
+            {"soru": "Porsche logosunda hangi hayvan görülebilir?", "secenekler": ["Aslan", "Kaplan", "Boğa", "At"], "dogru": "D"},
             {"soru": "Android uygulamaları geliştirmek için hangi programlama dili sıklıkla kullanılır?", "secenekler": ["Java", "Python", "C++", "C#"], "dogru": "A"},
-            {"soru": "Penisilini kim keşfetti?", "secenekler": ["Humphry Davy", "Robert Boyle", "Marie Curie", "Alexander Fleming"], "dogru": "D"},
-            {"soru": "Hangi popüler TV dizisinde Targaryen ve Stark hanedanı yer aldı?", "secenekler": ["Game of Thrones", "House of the Dragon", "The Walking Dead", "Supernatural"], "dogru": "A"},
-            {"soru": "Dünyanın en derin noktası neresidir?", "secenekler": ["Mariana Çukuru", "Tonga Çukuru", "Java Çukuru", "Puerto Rico Çukuru"], "dogru": "A"},
-            {"soru": "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "secenekler": ["Pac-Man", "Tabu", "Monopoly", "Mlyoner"], "dogru": "C"},
+            {"soru": "Işık hızı saniyede kaç kilometredir?", "secenekler": ["300,000 km/s", "150,000 km/s", "1,000,000 km/s", "500,000 km/s"], "dogru": "A"},
         ]
 
-        self.zor_sorular = [ #17 soru
+
+        self.seviye4_sorular = [
+            {"soru": "Penisilini kim keşfetti?", "secenekler": ["Humphry Davy", "Robert Boyle", "Marie Curie", "Alexander Fleming"], "dogru": "D"},
+            {"soru": "Hangisi Türkiye'de UNESCO Dünya Mirası Listesi'nde yer alan bir antik kenttir?", "secenekler": ["Çatalhöyük", "Ani Harabeleri", "Göbekli Tepe", "Hepsi"], "dogru": "D"},
+            {"soru": "Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?", "secenekler": ["Mekanik", "Termodinamik", "Kuantum Fiziği", "Optik"], "dogru": "C"},
+            {"soru": "Dünyanın en derin noktası neresidir?", "secenekler": ["Mariana Çukuru", "Tonga Çukuru", "Java Çukuru", "Puerto Rico Çukuru"], "dogru": "A"},
+            {"soru": "Kuzey Işıkları olarak bilinen doğa olayı hangi gezegenin manyetik alanıyla ilgilidir?", "secenekler": ["Mars", "Merkür", "Dünya", "Uranüs"], "dogru": "C"},
+            {"soru": "Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanılır?", "secenekler": ["Sabırsızlık", "Direnç", "Hız", "Uyum"], "dogru": "B"},
+        ]
+
+        self.seviye5_sorular = [
+            {"soru": "Marvel sinematik evreninde 'Kaptan Amerika' karakterini canlandıran oyuncu kimdir?", "secenekler": ["Chris Pratt", "Chris Hemsworth", "Chris Evans", "Robert Downey Jr."], "dogru": "C"},
+            {"soru": "Genellikle 'Pop'un Kralı' olarak anılan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanılan sanatçı kimdir?", "secenekler": ["Justin Bieber", "Micheal Jackson", "George Micheal", "The Weekend"], "dogru": "B"},
+            {"soru": "Hangi popüler TV dizisinde Targaryen ve Stark hanedanı yer aldı?", "secenekler": ["Game of Thrones", "House of the Dragon", "The Walking Dead", "Supernatural"], "dogru": "A"},
+            {"soru": "Thor hangi Tanrı'nın oğluydu?", "secenekler": ["Odin", "Loki", "Zeus", "Hades"], "dogru": "A"},
+            {"soru": "Müzeyyen Senar hangi dönemde ün kazanmıştır?", "secenekler": ["1920'ler", "1940'lar", "1960'lar", "1980'ler"], "dogru": "B"},
+            {"soru": "İlk Türk kadın romancı kimdir?", "secenekler": ["Halide Edip Adıvar", "Fatma Aliye Topuz", "Nezihe Muhiddin", "Afife Jale"], "dogru": "B"},
+        ]
+
+
+        self.seviye6_sorular = [
             {"soru": "On kıtadan oluşan İstiklal Marşı'nın tamamında, bu kelimelerden hangisi diğerlerinden daha az geçer?", "secenekler": ["Vatan", "Kan", "Toprak", "Yurt"], "dogru": "C"},
             {"soru": "Hangisi “Dede Korkut Hikayeleri”’ndeki karakterlerden biri değildir?", "secenekler": ["Bala Hatun", "Banu Çiçek", "Bamsı Beyrek", "Bayındır Han"], "dogru": "A"},
-            {"soru": "Türkiye'deki 81 ilin adında bu dört harften hangisi diğer üçünden daha az bulunur?", "secenekler": ["Ş", "V", "G", "H"], "dogru": "B"},
-            {"soru": "23 Nisan 1920'de açılan TBMM'nin birinci dönem milletvekillerinden hangisi, milletvekili olduğu il ile doğru eşleştirilmiştir?", "secenekler": ["Mustafa Kemal Paşa, Antep", "Kazım Karabekir Paşa, Erzurum", "Miralay İsmet, Malatya", "Fevzi Paşa, Kozan"], "dogru": "D"},
-            {"soru": "Cumhurbaşkanlığı forsu ve armasında, Türkiye'yi temsil eden güneşin etrafındaki 16 yıldızın temsil ettiği 16 Türk devleti arasında hangisi yoktur?", "secenekler": ["Batı Hun İmparatorluğu", "Harzemşahlar", "Avar İmparatorluğu", "Anadolu Selçuklu Devleti"], "dogru": "D"},
-            {"soru": "Herodot'un yazdığı, Mısır firavununun “dil kökeni deneyi”nde… Doğunca kimseyle konuşturulmayan çocuğun söylediği ilk kelime nedir?", "secenekler": ["Ver", "Anne", "Ekmek", "Su"], "dogru": "C"},
             {"soru": "Kur'an-ı Kerim'de hangisi üzerine yemin edilmemiştir?", "secenekler": ["Deniz", "Güneş", "Arı", "Kalem"], "dogru": "C"},
-            {"soru": "Türk sanat müziği sanatçısı Müzeyyen Senar hangi dönemde ün kazanmıştır?", "secenekler": ["1920'ler", "1940'lar", "1960'lar", "1980'ler"], "dogru": "B"},
-            {"soru": "Marvel sinematik evreninde 'Kaptan Amerika' karakterini canlandıran oyuncu kimdir?", "secenekler": ["Chris Pratt", "Chris Hemsworth", "Chris Evans", "Robert Downey Jr."], "dogru": "C"},
-            {"soru": "Bale sanatı ilk olarak hangi dönemde ortaya çıkmıştır?", "secenekler": ["Orta Çağ", "Rönesans", "Barok Dönemi", "Romantik Dönem"], "dogru": "B"},
-            {"soru": "Hangi Amerika eyaleti yüzölçümü bakımından en büyüktür?", "secenekler": ["New York", "Alaska", "Washington", "Montana"], "dogru": "B"},
+            {"soru": "Cumhurbaşkanlığı forsu ve armasındaki 16 Türk devleti arasında hangisi yoktur?", "secenekler": ["Batı Hun İmparatorluğu", "Harzemşahlar", "Avar İmparatorluğu", "Anadolu Selçuklu Devleti"], "dogru": "D"},
+            {"soru": "Herodot'un deneyinde, konuşmayan çocuğun söylediği ilk kelime nedir?", "secenekler": ["Ver", "Anne", "Ekmek", "Su"], "dogru": "C"},
+            {"soru": "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "secenekler": ["Pac-Man", "Tabu", "Monopoly", "Mlyoner"], "dogru": "C"},
+            {"soru": "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "secenekler": ["İnsan", "Fare", "Fil", "Karınca"], "dogru": "D"},
             {"soru": "Giza'da kaç tane piramit yapılmıştır?", "secenekler": ["2", "3", "4", "5"], "dogru": "B"},
-            {"soru": "İhtiyar Adam ve Deniz' kitabını yazan ve 20. yüzyılın en büyük yazarlarından biri olarak kabul edilen kişi kimdir?", "secenekler": ["Oscar Wilde", "Arthur Conan Doyle", "William Shakespeare", "Ernest Hemingway"], "dogru": "D"},
-            {"soru": "İlk yazılı anayasayı kim yapmıştır?", "secenekler": ["Amerika", "Fransa", "İngiltere", "Roma"], "dogru": "A"},
-            {"soru": "Genellikle 'Pop'un Kralı' olarak anılan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanılan sanatçı kimdir?", "secenekler": ["Justin Bieber", "Micheal Jackson", "George Micheal", "The Weekend"], "dogru": "B"},
-            {"soru": "Thor hangi Tanrı'nın oğluydu?", "secenekler": ["Odin", "Loki", "Zeus", "Hades"], "dogru": "A"},
-            {"soru": "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "secenekler": ["İnsan", "Fare", "Fil", "Karınca"], "dogru": "D"}, # Yeni zor soru
         ]
 
         self.sorular = []  
@@ -500,14 +501,14 @@ class SecondWindow(QWidget):
         self.mevcut_odulu_vurgula()
 
     def levele_gore_soru_secimi(self):
-        kolay_secim = random.sample(self.kolay_sorular, 4)
-        orta_secim = random.sample(self.orta_sorular, 4)
-        zor_secim = random.sample(self.zor_sorular, 4)
-        kolay_secim = random.sample(self.kolay_sorular, 4)
-        orta_secim = random.sample(self.orta_sorular, 4)
-        zor_secim = random.sample(self.zor_sorular, 4)
+        seviye1_secim = random.sample(self.seviye1_sorular, 2)
+        seviye2_secim = random.sample(self.seviye2_sorular, 2)
+        seviye3_secim = random.sample(self.seviye3_sorular, 2)
+        seviye4_secim = random.sample(self.seviye4_sorular, 2)
+        seviye5_secim = random.sample(self.seviye5_sorular, 2)
+        seviye6_secim = random.sample(self.seviye6_sorular, 2)
 
-        self.questions = kolay_secim + orta_secim + zor_secim
+        self.questions = seviye1_secim + seviye2_secim+seviye3_secim+seviye4_secim+seviye5_secim+seviye6_secim
 
     #o anki sorunun ödülünü vurgulama
     def mevcut_odulu_vurgula(self):
