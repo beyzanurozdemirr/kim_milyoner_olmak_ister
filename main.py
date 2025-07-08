@@ -4,19 +4,33 @@ import random
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QPushButton,QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
     QStackedWidget, QMessageBox, QProgressBar, QGridLayout,QHeaderView, QInputDialog) 
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtCore import Qt, QTimer,QUrl
 from PyQt5.QtGui import QFont, QPixmap, QIcon
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 #1.PENCERE
 class FirstWindow(QWidget):
     def __init__(self, stacked_widget):
         super().__init__()
-        self.stacked_widget = stacked_widget 
-        self.init_ui() #arayüz tasarımı
-        self.create_db() #veritabanı
-        self.load_scores()  #skor geçmişini tablo haline getirir
+        self.stacked_widget = stacked_widget
+        self.media_player = QMediaPlayer()
+        self.music_file = "first_music.mp3" #1.pencere için
+        self.media_player.setMedia(QMediaContent(QUrl.fromLocalFile(self.music_file)))
+        self.media_player.setVolume(50)
+        self.init_ui()
+        self.create_db()
+        self.load_scores()
 
     def init_ui(self):
+        #arka plan resmi 
+        self.background_label = QLabel(self)
+        pixmap = QPixmap("image.jpg")
+        self.background_label.setPixmap(pixmap)
+        self.background_label.setScaledContents(True) #resmi pencere boyutuna göre ayarlıyo
+        self.background_label.setGeometry(0, 0, self.width(), self.height())
+
+        #pencere boyutu değişse de ona göre ayarlansın
+        self.resizeEvent = self.on_resize
         self.setStyleSheet("""
             QWidget {
                 background-color: #f0f0f0;
@@ -61,6 +75,18 @@ class FirstWindow(QWidget):
                 border: 1px solid #ddd;
                 font-weight: bold;
             }
+            QPushButton#sound_button {
+                background-color: #28a745;
+                border-radius: 25px;
+                min-width: 50px;
+                max-width: 50px;
+                min-height: 50px;
+                max-height: 50px;
+                padding: 0;
+            }
+            QPushButton#sound_button:hover {
+                background-color: #218838;
+            }
         """)
         #başlık, hoşgeldiniz
         main_title = QLabel("KİM MİLYONER İSTER ?")
@@ -72,7 +98,7 @@ class FirstWindow(QWidget):
         self.name_input = QLineEdit()
         self.surname_input = QLineEdit()
         self.age_input = QLineEdit()
-    
+
         self.joker_person1_input = QLineEdit()
         self.joker_person2_input = QLineEdit()
         self.joker_person3_input = QLineEdit()
@@ -85,8 +111,8 @@ class FirstWindow(QWidget):
         form_layout.addWidget(self.surname_input, 1, 1)
         form_layout.addWidget(QLabel("Yaşınız:"), 2, 0)
         form_layout.addWidget(self.age_input, 2, 1)
-        
-        # Joker kişi giriş alanları 
+
+        #Joker giriş alan
         form_layout.addWidget(QLabel("Telefon Jokeri Kişi 1 (Zorunlu):"), 3, 0)
         form_layout.addWidget(self.joker_person1_input, 3, 1)
         form_layout.addWidget(QLabel("Telefon Jokeri Kişi 2 (İsteğe Bağlı):"), 4, 0)
@@ -103,16 +129,11 @@ class FirstWindow(QWidget):
         vbox_user.addLayout(form_layout)
         vbox_user.addSpacing(20)
         vbox_user.addWidget(start_button, alignment=Qt.AlignCenter)
-        vbox_user.addStretch()
 
         user_widget_inner = QWidget()
         user_widget_inner.setLayout(vbox_user)
-        user_widget_outer = QVBoxLayout()
-        user_widget_outer.addStretch()
-        user_widget_outer.addWidget(user_widget_inner, alignment=Qt.AlignCenter)
-        user_widget_outer.addStretch()
         user_widget = QWidget()
-        user_widget.setLayout(user_widget_outer)
+        user_widget.setLayout(vbox_user)
 
         #skor geçmişi tablo hali
         self.score_table = QTableWidget()
@@ -151,22 +172,45 @@ class FirstWindow(QWidget):
         button_layout.addWidget(btn_scores)
         button_layout.addStretch()
 
+       #ana içerik
         main_inner_layout = QVBoxLayout()
         main_inner_layout.addWidget(main_title)
         main_inner_layout.addLayout(button_layout)
         main_inner_layout.addWidget(self.pages)
+        main_inner_layout.addStretch() #yukarı doğru itmek için kullandım
 
-        centered_layout = QHBoxLayout()
-        centered_layout.addStretch()
-        centered_layout.addLayout(main_inner_layout)
-        centered_layout.addStretch()
+        #yatayda
+        centered_h_layout = QHBoxLayout()
+        centered_h_layout.addStretch()
+        centered_h_layout.addLayout(main_inner_layout)
+        centered_h_layout.addStretch()
 
-        centered_outer_layout = QVBoxLayout()
-        centered_outer_layout.addStretch()
-        centered_outer_layout.addLayout(centered_layout)
-        centered_outer_layout.addStretch()
+        #dikeyde
+        overall_layout = QVBoxLayout(self) # FirstWindow'un ana layout'u
+        overall_layout.addStretch()
+        overall_layout.addLayout(centered_h_layout)
+        overall_layout.addStretch()
 
-        self.setLayout(centered_outer_layout)
+        #ses butonu
+        self.sound_button = QPushButton()
+        self.sound_button.setObjectName("sound_button")
+        self.update_sound_button_icon()
+        self.sound_button.clicked.connect(self.toggle_music)
+
+        #ses butonu sol alta yerleştirmek için
+        bottom_left_container = QWidget(self)
+        bottom_left_layout = QVBoxLayout(bottom_left_container)
+        bottom_left_layout.addStretch()
+        bottom_left_layout.addWidget(self.sound_button, alignment=Qt.AlignBottom | Qt.AlignLeft)
+        bottom_left_layout.setContentsMargins(10, 10, 10, 10) 
+        self.sound_button.setParent(self)
+        self.sound_button.move(10, self.height() - self.sound_button.height() - 10)
+        self.resizeEvent = self.on_resize
+
+    def on_resize(self, event):
+        self.background_label.setGeometry(0, 0, self.width(), self.height())
+        self.sound_button.move(10, self.height() - self.sound_button.height() - 10)
+        event.accept()
 
     #skor geçmişi için veritabanı
     def create_db(self):
@@ -199,7 +243,7 @@ class FirstWindow(QWidget):
         soyad = self.surname_input.text().strip()
         yas = self.age_input.text().strip()
         joker_person1 = self.joker_person1_input.text().strip()
-        
+
         if not ad or not soyad or not yas or not joker_person1:
             QMessageBox.warning(self, "Uyarı", "Lütfen tüm zorunlu alanları doldurunuz.")
             return
@@ -219,25 +263,50 @@ class FirstWindow(QWidget):
     #2.pencereye geçiş
         self.stacked_widget.setCurrentIndex(1)
 
+    def toggle_music(self):
+        if self.media_player.state() == QMediaPlayer.PlayingState:
+            self.media_player.pause()
+        else:
+            self.media_player.play()
+        self.update_sound_button_icon()
+
+    def update_sound_button_icon(self):
+        if self.media_player.state() == QMediaPlayer.PlayingState:
+            pixmap = QPixmap("sound_on.png") #ses açık
+        else:
+            pixmap = QPixmap("sound_off.png") #ses kapalı
+
+        if pixmap.isNull():
+            pixmap = QPixmap(50, 50)
+            pixmap.fill(Qt.gray)
+        else:
+            pixmap = pixmap.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.sound_button.setIcon(QIcon(pixmap))
+        self.sound_button.setIconSize(pixmap.size())
 
 #2.PENCERE
 class SecondWindow(QWidget):
     def __init__(self):
         super().__init__()
+        self.media_player = QMediaPlayer()
+        self.music_file = "game_music.mp3" #2.pencere müzik
+        self.media_player.setMedia(QMediaContent(QUrl.fromLocalFile(self.music_file)))
+        self.media_player.setVolume(80)
+
         self.time_per_question = 60
         self.time_left = self.time_per_question
         self.current_question_index = 0
         self.last_safe_index = -1
         self.player_name = ""
         self.player_surname = ""
-        self.joker_persons = [] # Joker kişilerini tutacak yeni bir liste
+        self.joker_persons = [] #joker kişilerini tutacak
         self.conn = sqlite3.connect("scores.db")
         self.cursor = self.conn.cursor()
-        self.fifty_fifty_used = False # Joker kullanımını takip etmek için
-        self.phone_joker_used = False # Telefon jokeri kullanımını takip etmek için
+        self.fifty_fifty_used = False # joker takibi- yarı yarıya
+        self.phone_joker_used = False #joker takibi - telefon 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_timer)
-        
+
         #ödül kısmı
         self.oduller = [
             "1. 1.000 TL", "2. 2.000 TL", "3. 3.000 TL", "4. 5.000 TL",
@@ -306,15 +375,14 @@ class SecondWindow(QWidget):
             {"soru": "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "secenekler": ["Pac-Man", "Tabu", "Monopoly", "Mlyoner"], "dogru": "C"},
             {"soru": "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "secenekler": ["İnsan", "Fare", "Fil", "Karınca"], "dogru": "D"},
             {"soru": "Giza'da kaç tane piramit yapılmıştır?", "secenekler": ["2", "3", "4", "5"], "dogru": "B"},
-        ]
+] 
 
         self.sorular = []  
         self.init_ui()
 
     def init_ui(self):
-        #arayüz tasarımı
         self.setStyleSheet("""
-            QWidget { 
+            QWidget {
                 background-color: #1a2a40; /* siyah */
                 color: white;
                 font-family: 'Segoe UI', sans-serif;
@@ -342,8 +410,8 @@ class SecondWindow(QWidget):
             QPushButton:hover {
                 background-color: #0056b3; /*koyu mavi */
             }
-            QPushButton#quit_button { /*geri çekil buton*/
-                background-color: #e81324; 
+            QPushButton#quit_button {
+                background-color: #e81324;
             }
             QPushButton#quit_button:hover {
                 background-color: #c82333;
@@ -356,11 +424,11 @@ class SecondWindow(QWidget):
                 color: black;
             }
             QProgressBar::chunk {
-                background-color: #28a745; 
+                background-color: #28a745;
                 border-radius: 3px;
             }
             QLabel[highlight="true"] {
-                background-color: #ba6330; /* sarı */
+                background-color: #ba6330;
                 color: black;
                 border: 2px solid #ba6330;
                 border-radius: 5px;
@@ -374,17 +442,29 @@ class SecondWindow(QWidget):
             QLabel {
                 padding: 5px;
             }
+            QPushButton#sound_button {
+                background-color: #28a745;
+                border-radius: 25px;
+                min-width: 50px;
+                max-width: 50px;
+                min-height: 50px;
+                max-height: 50px;
+                padding: 0;
+            }
+            QPushButton#sound_button:hover {
+                background-color: #218838;
+            }
         """)
-        #sol-- jokerler,ödüller,ses simgesi
-        #sağ-- sorular, geri çekil butonu, süre çubuğı
+        # sol-- jokerler,ödüller,ses simgesi
+        # sağ-- sorular, geri çekil butonu, süre çubuğı
 
-        #sol panel
+        # sol panel
         main_layout = QHBoxLayout()
         sol_layout = QVBoxLayout()
         sol_layout.setSpacing(10)
         sol_layout.setContentsMargins(10, 10, 10, 10)
-        
-        #jokerler
+
+        # jokerler
         joker_label = QLabel("Joker Hakları")
         joker_label.setFont(QFont("Segoe UI", 16, QFont.Bold))
         joker_label.setAlignment(Qt.AlignCenter)
@@ -437,8 +517,8 @@ class SecondWindow(QWidget):
         self.btn_phone.setIconSize(pixmap_phone.size())
         self.btn_phone.setFixedSize(60, 60)
         self.btn_phone.setStyleSheet("background-color: #6c757d;hover:background-color: #b31942;  border-radius: 30px; border: 2px solid #5a6268;")
-        self.btn_phone.clicked.connect(self.phone_lifeline) # Bağlantı eklendi
-        self.joker_buttons.append(self.btn_phone) # self.btn_phone olarak eklendi
+        self.btn_phone.clicked.connect(self.phone_lifeline) 
+        self.joker_buttons.append(self.btn_phone)
         joker_layout.addWidget(self.btn_phone)
 
         sol_layout.addLayout(joker_layout)
@@ -446,7 +526,7 @@ class SecondWindow(QWidget):
 
         self.odul_labels = []
 
-        #Ödülleri ters sırayla ekliyoruz
+        # Ödülleri ters sırayla ekliyoruz
         for i, odul in reversed(list(enumerate(self.oduller))):
             lbl = QLabel(odul)
             lbl.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
@@ -457,13 +537,27 @@ class SecondWindow(QWidget):
             else:
                 lbl.setStyleSheet("border: 1px solid #100f47; padding: 8px; background-color: #34495e; color: white; border-radius: 5px;")
 
-            self.odul_labels.insert(0, lbl)  
+            self.odul_labels.insert(0, lbl)
             sol_layout.addWidget(lbl)
 
         sol_layout.addStretch()
+
+        # Ses butonu
+        self.sound_button = QPushButton()
+        self.sound_button.setObjectName("sound_button")
+        self.update_sound_button_icon()
+        self.sound_button.clicked.connect(self.toggle_music)
+
+        # Ses butonunu sol alta yerleştiriyoruz
+        bottom_left_layout = QHBoxLayout()
+        bottom_left_layout.addWidget(self.sound_button)
+        bottom_left_layout.addStretch() # Butonu sola yaslar
+
+        sol_layout.addLayout(bottom_left_layout) # Sol layout'a ekle
+
         main_layout.addLayout(sol_layout, 1)
 
-        #Sağ panel 
+        # Sağ panel
         sag_layout = QVBoxLayout()
         sag_layout.setSpacing(20)
         sag_layout.setContentsMargins(20, 20, 20, 20)
@@ -510,7 +604,7 @@ class SecondWindow(QWidget):
 
         self.questions = seviye1_secim + seviye2_secim+seviye3_secim+seviye4_secim+seviye5_secim+seviye6_secim
 
-    #o anki sorunun ödülünü vurgulama
+    # o anki sorunun ödülünü vurgulama
     def mevcut_odulu_vurgula(self):
         for i, lbl in enumerate(self.odul_labels):
             if i in self.baraj_sorulari:
@@ -522,9 +616,9 @@ class SecondWindow(QWidget):
             current_lbl = self.odul_labels[self.current_question_index]
             current_lbl.setProperty("highlight", "true")
             current_lbl.setStyleSheet("border: 2px solid #ba6330; padding: 8px; background-color: #ffc107; color: black; font-weight: bold; border-radius: 5px;")
-            current_lbl.style().polish(current_lbl) 
+            current_lbl.style().polish(current_lbl)
 
-    #ekrana soruyu yazdırma + butonlara şık yerleştirme
+    # ekrana soruyu yazdırma + butonlara şık yerleştirme
     def start_question(self):
         self.mevcut_odulu_vurgula()
 
@@ -536,7 +630,7 @@ class SecondWindow(QWidget):
         self.question_label.setText(soru["soru"])
         for i, btn in enumerate(self.choice_buttons):
             btn.setText(f"{chr(65+i)}: {soru['secenekler'][i]}")
-            btn.setEnabled(True)  
+            btn.setEnabled(True)
             btn.setStyleSheet("background-color:#201f80; hover:background-color: #100f47; color: white; border: none; border-radius: 10px; padding: 15px 25px; font-size: 14pt; font-weight: bold; min-width: 150px;")
 
         self.time_left = self.time_per_question
@@ -544,16 +638,16 @@ class SecondWindow(QWidget):
         self.progress.setValue(self.time_left)
         self.timer.start(1000)
 
-    #süre akışı 1er saniye
+    # süre akışı 1er saniye
     def update_timer(self):
         self.time_left -= 1
         self.progress.setValue(self.time_left)
         if self.time_left <= 0:
             self.timer.stop()
             QMessageBox.information(self, "Süre Doldu", "Süreniz doldu! Yanlış cevap kabul edildi.")
-            self.game_over(win=False) 
+            self.game_over(win=False)
 
-    #cevap kontrolleri 
+    # cevap kontrolleri
     def answer_clicked(self):
         sender = self.sender()
         secilen_harf = sender.text()[0]
@@ -575,7 +669,7 @@ class SecondWindow(QWidget):
             QMessageBox.warning(self, "Yanlış!", f"Yanlış cevap! Doğru cevap: {dogru_harf}: {self.questions[self.current_question_index]['secenekler'][ord(dogru_harf)-65]}.")
             self.game_over(win=False)
 
-    #yarı yarıya joker hakkı
+    # yarı yarıya joker hakkı
     def fifty_fifty_lifeline(self):
         if self.fifty_fifty_used:
             QMessageBox.warning(self, "Joker Hakkı", "Yarı yarıya jokerini zaten kullandınız.")
@@ -583,7 +677,7 @@ class SecondWindow(QWidget):
 
         current_question = self.questions[self.current_question_index]
         correct_answer_index = ord(current_question["dogru"]) - ord('A')
-        
+
         incorrect_indices = [i for i in range(4) if i != correct_answer_index and self.choice_buttons[i].isEnabled()]
         # En fazla 2 yanlış cevap silinmeli
         num_to_remove = min(2, len(incorrect_indices))
@@ -593,26 +687,33 @@ class SecondWindow(QWidget):
             # random gelen yanlış cevapları sil
             for i in random_incorrect_to_remove:
                 self.choice_buttons[i].setEnabled(False)
-                self.choice_buttons[i].setText("") 
+                self.choice_buttons[i].setText("")
 
         self.fifty_fifty_used = True
-        self.joker_buttons[1].setEnabled(False) 
+        self.joker_buttons[1].setEnabled(False)
         QMessageBox.information(self, "Yarı Yarıya", "İki yanlış cevap kaldırıldı.")
 
     # Telefon jokeri (yeni)
     def phone_lifeline(self):
-            
+        if self.phone_joker_used:
+            QMessageBox.warning(self, "Joker Hakkı", "Telefon jokerini zaten kullandınız.")
+            return
+
+        if not self.joker_persons:
+            QMessageBox.warning(self, "Joker Hakkı", "Tanımlanmış joker kişi bulunmamaktadır. Lütfen ilk ekranda en az bir joker kişi tanımlayın.")
+            return
+
         person, ok = QInputDialog.getItem(self, "Telefonla Joker", "Kimi aramak istersiniz?", self.joker_persons, 0, False)
-        
+
         if ok and person:
             current_question = self.questions[self.current_question_index]
             correct_answer_index = ord(current_question["dogru"]) - ord('A')
             correct_answer_text = current_question["secenekler"][correct_answer_index]
-            
+
             roll = random.randint(1, 10)
             response_text = ""
             # Güven seviyeleri ve olasılıkları
-            if roll <= 1:  # 1 gelirse  cevap vermeesin
+            if roll <= 1:  # 1 gelirse cevap vermeesin
                 response_text = f"Merhaba, ben {person}. Üzgünüm, bu konu hakkında hiçbir bilgim yok."
             elif roll <= 3:  # 2 veya 3 gelirse random cevap versin
                 available_choices = [i for i in range(len(current_question["secenekler"])) if self.choice_buttons[i].isEnabled()]
@@ -627,24 +728,25 @@ class SecondWindow(QWidget):
 
             QMessageBox.information(self, f"{person} Cevabı", response_text)
             self.phone_joker_used = True
-            self.btn_phone.setEnabled(False)  
+            self.btn_phone.setEnabled(False)
 
-    #oyun bitişi ve kazanılan ödülün bildirilişi
+    # oyun bitişi ve kazanılan ödülün bildirilişi
     def game_over(self, win: bool):
+        self.timer.stop()
         kazanc = "0 TL"
         if win:
-            kazanc = self.oduller[-1].split(' ', 1)[1]  
-            msg = f"Tebrikler! Tüm soruları bildiniz ve {kazanc} kazandınız"
+            kazanc = self.oduller[-1] # Son ödülü al
+            msg = f"Tebrikler! Tüm soruları bildiniz ve {kazanc} kazandınız!"
         else:
             if self.last_safe_index >= 0:
-                kazanc = self.oduller[self.last_safe_index].split(' ', 1)[1]
+                kazanc = self.oduller[self.last_safe_index] # Baraj sorusunda kalınan ödül
             msg = f"Yarışma sona erdi. {kazanc} kazandınız."
 
         QMessageBox.information(self, "Oyun Bitti", msg)
         self.save_score(kazanc)
         self.reset_game()
 
-    #skoru kaydetme
+    # skoru kaydetme
     def save_score(self, kazanc):
         self.cursor.execute("INSERT INTO skorlar (ad, soyad, kazanc) VALUES (?, ?, ?)",
                             (self.player_name, self.player_surname, kazanc))
@@ -652,12 +754,12 @@ class SecondWindow(QWidget):
         if hasattr(self.stacked_widget.widget(0), 'load_scores'):
             self.stacked_widget.widget(0).load_scores()
 
-    #oyuna tekrar döndürür
+    # oyuna tekrar döndürür
     def reset_game(self):
         self.current_question_index = 0
         self.last_safe_index = -1
         self.timer.stop()
-        self.fifty_fifty_used = False 
+        self.fifty_fifty_used = False
         self.phone_joker_used = False # Telefon jokerini sıfırla
         # Tüm joker butonlarını tekrar etkinleştir
         for btn in self.joker_buttons:
@@ -668,15 +770,32 @@ class SecondWindow(QWidget):
             btn.setEnabled(True)
         self.stacked_widget.setCurrentIndex(0)
 
-    #geri çekilme butonu
+    # geri çekilme butonu
+    def back_button_clicked(self):
+        self.timer.stop()
+        reply = QMessageBox.question(
+            self,
+            "Yarışmadan Çekil",
+            "Yarışmadan çekilmek istediğinize emin misiniz? Çekilirseniz, bulunduğunuz sorudan bir önceki ödülü kazanırsınız.",
+            QMessageBox.Yes | QMessageBox.No
+        )
+        if reply == QMessageBox.Yes:
+            kazanc = "0 TL"
+            if self.current_question_index > 0:
+                # current_question_index zaten mevcut sorunun index'i, bir önceki ödül için -1
+                kazanc = self.oduller[self.current_question_index - 1]
+            QMessageBox.information(self, "Yarışmadan Çekildiniz", f"Yarışmadan çekildiniz. {kazanc} kazandınız.")
+            self.save_score(kazanc)
+            self.reset_game()
+        else:
+            self.timer.start(1000)
     def back_button_clicked(self):
         self.timer.stop()
         reply = QMessageBox.question(
         self,
         "Yarışmadan Çekil",
         "Yarışmadan çekilmek istediğinize emin misiniz? Çekilirseniz, bulunduğunuz sorudan bir önceki ödülü kazanırsınız.",
-        QMessageBox.Yes | QMessageBox.No
-    )
+        QMessageBox.Yes | QMessageBox.No )
         if reply == QMessageBox.Yes:
             kazanc = "0 TL"
             if self.current_question_index > 0: 
@@ -686,35 +805,72 @@ class SecondWindow(QWidget):
             self.reset_game()
         else:
             self.timer.start(1000)
-
-    #2.pencereye duşarıdan pencere geçiş kontrolü
     def set_stacked_widget(self, stacked_widget):
         self.stacked_widget = stacked_widget
 
-#tüm pencere geçişleri, yönetimi
+    def toggle_music(self):
+        if self.media_player.state() == QMediaPlayer.PlayingState:
+            self.media_player.pause()
+        else:
+            self.media_player.play()
+        self.update_sound_button_icon()
+
+    def update_sound_button_icon(self):
+        if self.media_player.state() == QMediaPlayer.PlayingState:
+            pixmap = QPixmap("sound_on.png")
+        else:
+            pixmap = QPixmap("sound_off.png")
+
+        if pixmap.isNull():
+            pixmap = QPixmap(50, 50)
+            pixmap.fill(Qt.gray)
+        else:
+            pixmap = pixmap.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.sound_button.setIcon(QIcon(pixmap))
+        self.sound_button.setIconSize(pixmap.size())
+
+# tüm pencere geçişleri, yönetimi
 class MainApp(QStackedWidget):
     def __init__(self):
         super().__init__()
+
         self.first = FirstWindow(self)
         self.second = SecondWindow()
         self.second.set_stacked_widget(self)
+
         self.addWidget(self.first)
         self.addWidget(self.second)
+
         self.setWindowTitle("Kim Milyoner Olmak İster?")
-        self.resize(1000, 750) 
+        self.resize(1000, 750)
+        self.first.media_player.play()# Uygulama başladığında ilk pencerenin müziğini çal
 
     def setCurrentIndex(self, index: int) -> None:
+        current_window = self.currentWidget()
+        target_window = self.widget(index)
+        if hasattr(current_window, 'media_player') and current_window.media_player.state() == QMediaPlayer.PlayingState:
+            current_window.media_player.pause()
+
         super().setCurrentIndex(index)
+
+        if hasattr(target_window, 'media_player') and target_window.media_player.state() != QMediaPlayer.PlayingState:
+            if not QUrl.fromLocalFile(target_window.music_file).isValid():
+                print(f"Warning: Music file not found for {type(target_window).__name__}: {target_window.music_file}")
+            target_window.media_player.play()
+
+        self.first.update_sound_button_icon()
+        self.second.update_sound_button_icon()
+
+
         if index == 1:
             first_window = self.widget(0)
             self.second.player_name = first_window.name_input.text()
             self.second.player_surname = first_window.surname_input.text()
-            # Joker kişilerini ikinci pencereye aktar
+
             self.second.joker_persons = first_window.joker_persons
 
             self.second.levele_gore_soru_secimi()
             self.second.start_question()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
