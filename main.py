@@ -3,10 +3,12 @@ import sqlite3
 import random
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QPushButton,QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
-    QStackedWidget, QMessageBox, QProgressBar, QGridLayout,QHeaderView, QInputDialog) 
+    QStackedWidget, QMessageBox, QProgressBar, QGridLayout,QHeaderView, QInputDialog,QDialog) 
 from PyQt5.QtCore import Qt, QTimer,QUrl
 from PyQt5.QtGui import QFont, QPixmap, QIcon
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas    
 
 #1.PENCERE
 class FirstWindow(QWidget):
@@ -22,13 +24,11 @@ class FirstWindow(QWidget):
         self.load_scores()
 
     def init_ui(self):
-        #arka plan resmi 
         self.background_label = QLabel(self)
         pixmap = QPixmap("image.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True) #resmi pencere boyutuna göre ayarlıyo
         self.background_label.setGeometry(0, 0, self.width(), self.height())
-
         #pencere boyutu değişse de ona göre ayarlansın
         self.resizeEvent = self.on_resize
         self.setStyleSheet("""
@@ -304,6 +304,7 @@ class SecondWindow(QWidget):
         self.cursor = self.conn.cursor()
         self.fifty_fifty_used = False # joker takibi- yarı yarıya
         self.phone_joker_used = False #joker takibi - telefon 
+        self.audience_joker_used = False #joker takibi- seyirci
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_timer)
 
@@ -383,13 +384,13 @@ class SecondWindow(QWidget):
     def init_ui(self):
         self.setStyleSheet("""
             QWidget {
-                background-color: #1a2a40; /* siyah */
+                background-color: #1a2a40;
                 color: white;
                 font-family: 'Segoe UI', sans-serif;
                 font-size: 11pt;
             }
             QLabel#question_label {
-                background-color: #201f80; /* soru kısmı */
+                background-color: #201f80;
                 padding: 20px;
                 border-radius: 10px;
                 font-size: 16pt;
@@ -398,7 +399,7 @@ class SecondWindow(QWidget):
                 text-align: center;
             }
             QPushButton {
-                background-color: #201f80; /* cevap kısmı */
+                background-color: #201f80;
                 color: white;
                 border: none;
                 border-radius: 10px;
@@ -486,6 +487,7 @@ class SecondWindow(QWidget):
         btn_audience.setIconSize(pixmap_audience.size())
         btn_audience.setFixedSize(60, 60)
         btn_audience.setStyleSheet("background-color: #6c757d; hover:background-color: #b31942;border-radius: 30px; border: 2px solid #5a6268;")
+        btn_audience.clicked.connect(self.audience_lifeline) # Audience joker clicked
         self.joker_buttons.append(btn_audience)
         joker_layout.addWidget(btn_audience)
 
@@ -505,7 +507,7 @@ class SecondWindow(QWidget):
         self.joker_buttons.append(btn_fifty_fifty)
         joker_layout.addWidget(btn_fifty_fifty)
 
-        # Telefon jokeri (güncellendi)
+        #telefon jokeri 
         self.btn_phone = QPushButton()
         pixmap_phone = QPixmap("phone_call_joker.png")
         if pixmap_phone.isNull():
@@ -721,7 +723,7 @@ class SecondWindow(QWidget):
                     random_choice_index = random.choice(available_choices)
                     random_answer_text = current_question["secenekler"][random_choice_index]
                     response_text = f"Merhaba, ben {person}. Emin değilim ama bence cevap '{random_answer_text}' olmalı."
-                else: #
+                else: 
                     response_text = f"Merhaba, ben {person}. Hiç emin değilim ama tek kalan seçenek '{correct_answer_text}' gibi görünüyor."
             else:  # 4,5,6,7,8,9,10 gelirse kesinlikle doğru cevabı versin
                 response_text = f"Merhaba, ben {person}. Cevap kesinlikle '{correct_answer_text}'olmalı, eminim!"
@@ -729,6 +731,95 @@ class SecondWindow(QWidget):
             QMessageBox.information(self, f"{person} Cevabı", response_text)
             self.phone_joker_used = True
             self.btn_phone.setEnabled(False)
+
+    def audience_lifeline(self):
+        if self.audience_joker_used:
+            QMessageBox.warning(self, "Joker Hakkı", "Seyirci jokerini zaten kullandınız.")
+            return
+
+        current_question = self.questions[self.current_question_index]
+        correct_answer_index = ord(current_question["dogru"]) - ord('A')
+        choices = [f"{chr(65+i)}" for i in range(4)]
+        percentages = [0] * 4 
+
+        # doğru cevabı %30-35 arası random yapsın
+        correct_vote = random.randint(30, 35) 
+        percentages[correct_answer_index] = correct_vote
+
+        remaining_vote = 100 - correct_vote
+        incorrect_indices = [i for i in range(4) if i != correct_answer_index]
+
+        #Kalan yüzdeyi diğer seçeneklere dağıtsın
+        incorrect_options_percentages = []
+        if len(incorrect_indices) > 0:
+            #yalnış seçenkelerin ort
+            avg_incorrect_vote = remaining_vote / len(incorrect_indices)
+            
+            for _ in range(len(incorrect_indices)):
+                #ort. civarını sapmayla
+                inc_options_range_min = max(1, int(avg_incorrect_vote - 7)) #negatif olmasın 
+                inc_options_range_max = min(remaining_vote, int(avg_incorrect_vote + 7)) 
+                inc_options_range_max = max(inc_options_range_min, inc_options_range_max)
+                
+                inc_votes_val = random.randint(inc_options_range_min, inc_options_range_max)
+                incorrect_options_percentages.append(inc_votes_val)
+            
+            current_inc_sum = sum(incorrect_options_percentages)
+            diff_inc = remaining_vote - current_inc_sum
+            
+            for i in range(len(incorrect_options_percentages)):
+                if diff_inc == 0:
+                    break
+                if diff_inc > 0:
+                    incorrect_options_percentages[i] += 1
+                    diff_inc -= 1
+                elif diff_inc < 0 and incorrect_options_percentages[i] > 1: # Avoid making percentage negative
+                    incorrect_options_percentages[i] -= 1
+                    diff_inc += 1
+            
+            if diff_inc != 0 and len(incorrect_options_percentages) > 0:
+                incorrect_options_percentages[0] += diff_inc
+            incorrect_options_percentages = [max(0, v) for v in incorrect_options_percentages]
+
+            for i, idx in enumerate(incorrect_indices):
+                percentages[idx] = incorrect_options_percentages[i]
+        
+        #yüzdelerin toplamı 100 olmalı kontrolü
+        final_sum = sum(percentages)
+        if final_sum != 100:
+            diff_final = 100 - final_sum
+            percentages[correct_answer_index] += diff_final
+            percentages[correct_answer_index] = max(0, percentages[correct_answer_index]) # Ensure non-negative
+
+        percentages = [int(p) for p in percentages]
+        
+        #grafiği görüntülemek için kutu
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Seyirci Joker Hakkı Sonuçları")
+        dialog_layout = QVBoxLayout()
+
+        fig, ax = plt.subplots(figsize=(6, 4))
+        ax.bar(choices, percentages, color=['blue', 'green', 'red', 'purple'])
+        ax.set_ylim(0, 100)
+        ax.set_title("Seyircilerin Cevap Yüzdeleri")
+        ax.set_ylabel("Yüzde (%)")
+        ax.set_xlabel("Seçenekler")
+
+        for i, v in enumerate(percentages):
+            ax.text(i, v + 2, f"{v}%", ha='center', va='bottom') 
+
+        canvas = FigureCanvas(fig)
+        dialog_layout.addWidget(canvas)
+
+        dialog_message = QLabel("Seyircilerin verdiği cevap yüzdeleri aşağıdaki gibidir")
+        dialog_message.setAlignment(Qt.AlignCenter)
+        dialog_layout.addWidget(dialog_message)
+
+        dialog.setLayout(dialog_layout)
+        dialog.exec_()
+        plt.close(fig) 
+        self.audience_joker_used = True
+        self.joker_buttons[0].setEnabled(False) # Seyirci butonu
 
     # oyun bitişi ve kazanılan ödülün bildirilişi
     def game_over(self, win: bool):
@@ -761,6 +852,7 @@ class SecondWindow(QWidget):
         self.timer.stop()
         self.fifty_fifty_used = False
         self.phone_joker_used = False # Telefon jokerini sıfırla
+        self.audience_joker_used = False
         # Tüm joker butonlarını tekrar etkinleştir
         for btn in self.joker_buttons:
             btn.setEnabled(True)
@@ -776,30 +868,15 @@ class SecondWindow(QWidget):
         reply = QMessageBox.question(
             self,
             "Yarışmadan Çekil",
-            "Yarışmadan çekilmek istediğinize emin misiniz? Çekilirseniz, bulunduğunuz sorudan bir önceki ödülü kazanırsınız.",
+            "Yarışmadan çekilmek istediğinize emin misiniz? Çekilirseniz, bir önceki baraj sorusunun ödülünü kazanırsınız.",
             QMessageBox.Yes | QMessageBox.No
         )
         if reply == QMessageBox.Yes:
             kazanc = "0 TL"
-            if self.current_question_index > 0:
-                # current_question_index zaten mevcut sorunun index'i, bir önceki ödül için -1
-                kazanc = self.oduller[self.current_question_index - 1]
-            QMessageBox.information(self, "Yarışmadan Çekildiniz", f"Yarışmadan çekildiniz. {kazanc} kazandınız.")
-            self.save_score(kazanc)
-            self.reset_game()
-        else:
-            self.timer.start(1000)
-    def back_button_clicked(self):
-        self.timer.stop()
-        reply = QMessageBox.question(
-        self,
-        "Yarışmadan Çekil",
-        "Yarışmadan çekilmek istediğinize emin misiniz? Çekilirseniz, bulunduğunuz sorudan bir önceki ödülü kazanırsınız.",
-        QMessageBox.Yes | QMessageBox.No )
-        if reply == QMessageBox.Yes:
-            kazanc = "0 TL"
             if self.current_question_index > 0: 
-                    kazanc = self.oduller[self.current_question_index - 1].split(' ', 1)[1]
+                kazanc = self.oduller[self.last_safe_index].split(': ')[1] # Baraj sorusunun ödülünü al
+            elif self.current_question_index > 0: # Eğer baraj sorusuna ulaşılmadıysa ve ilk soruyu geçtiyse
+                kazanc = self.oduller[self.current_question_index - 1].split(': ')[1]
             QMessageBox.information(self, "Yarışmadan Çekildiniz", f"Yarışmadan çekildiniz. {kazanc} kazandınız.")
             self.save_score(kazanc)
             self.reset_game()
@@ -855,7 +932,7 @@ class MainApp(QStackedWidget):
 
         if hasattr(target_window, 'media_player') and target_window.media_player.state() != QMediaPlayer.PlayingState:
             if not QUrl.fromLocalFile(target_window.music_file).isValid():
-                print(f"Warning: Music file not found for {type(target_window).__name__}: {target_window.music_file}")
+                print(f"Müzik dosyası bulunamadı {type(target_window).__name__}: {target_window.music_file}")
             target_window.media_player.play()
 
         self.first.update_sound_button_icon()
