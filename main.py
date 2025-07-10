@@ -25,7 +25,7 @@ class FirstWindow(QWidget):
 
     def init_ui(self):
         self.background_label = QLabel(self)
-        pixmap = QPixmap("image.jpg")
+        pixmap = QPixmap("first_image.png")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True) #resmi pencere boyutuna göre ayarlıyo
         self.background_label.setGeometry(0, 0, self.width(), self.height())
@@ -92,7 +92,7 @@ class FirstWindow(QWidget):
         main_title = QLabel("KİM MİLYONER OLMAK İSTER ?")
         main_title.setFont(QFont("Arial", 36, QFont.Bold))
         main_title.setAlignment(Qt.AlignCenter)
-        main_title.setStyleSheet("color: #100f47; padding: 20px; font-size: 30pt; ")
+        main_title.setStyleSheet("color: orange; padding: 20px; font-size: 30pt; ")
 
         #kullanıcı giriş bilgileri
         self.name_input = QLineEdit()
@@ -383,7 +383,7 @@ class SecondWindow(QWidget):
 
     def init_ui(self):
         self.background_label = QLabel(self)
-        pixmap = QPixmap("image.jpg")
+        pixmap = QPixmap("second_image.jpg")
         self.background_label.setPixmap(pixmap)
         self.background_label.setScaledContents(True) #resmi pencere boyutuna göre ayarlıyo
         self.background_label.setGeometry(0, 0, self.width(), self.height())
@@ -961,7 +961,7 @@ class ThirdWindow(QWidget):
     def init_ui(self):
         #arka plan resmi için
         self.background_label = QLabel(self)
-        pixmap = QPixmap("image.jpg")
+        pixmap = QPixmap("first_image.png")
         if not pixmap.isNull():
             self.background_label.setPixmap(pixmap)
             self.background_label.setScaledContents(True)
@@ -983,13 +983,13 @@ class ThirdWindow(QWidget):
             QLabel#title_label {
                 font-size: 36pt;
                 font-weight: bold;
-                color: #27ae60;
+                color: orange;
                 margin-bottom: 20px;
             }
             QLabel#score_label {
                 font-size: 48pt;
                 font-weight: bold;
-                color: #27ae60;
+                color: orange;
                 margin-top: 30px;
                 margin-bottom: 40px;
             }
