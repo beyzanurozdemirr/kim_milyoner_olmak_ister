@@ -1,0 +1,101 @@
+2025-07-15 23:14:09,926 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:14:18,528 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-15 23:14:18,528 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:14:18,532 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-15 23:14:28,012 - INFO - Seyirciye sorma jokeri soru 1 için kullanýldý. Yüzdeler: [30, 17, 35, 18]
+2025-07-15 23:14:29,192 - INFO - Soru 1 doðru cevaplandý. Seçilen: C (2).
+2025-07-15 23:14:29,193 - INFO - Soru 2 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-15 23:14:37,433 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-15 23:14:37,433 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-15 23:14:37,434 - INFO - Soru 3 gösterildi: 'Fatih Sultan Mehmet’in babasý kimdir?'
+2025-07-15 23:14:39,993 - INFO - 50/50 joker hakký soru 3 için kullanýldý.
+2025-07-15 23:14:41,297 - INFO - Soru 3 doðru cevaplandý. Seçilen: B (II.Murad).
+2025-07-15 23:14:41,299 - INFO - Soru 4 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'
+2025-07-15 23:14:42,845 - INFO - Telefon jokeri kullanýldý: s (rastgele cevap verdi).
+2025-07-15 23:14:47,575 - WARNING - Soru 4 yanlýþ cevaplandý. Seçilen: A (Kedi Pastasý), Doðru: D (Tiramisu). Oyun sona erdi.
+2025-07-15 23:14:54,038 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:15:03,109 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:15:10,543 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 7
+2025-07-15 23:15:10,543 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:15:10,546 - INFO - Soru 1 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-15 23:15:14,043 - INFO - Soru 1 doðru cevaplandý. Seçilen: A (Kalp).
+2025-07-15 23:15:14,044 - INFO - Soru 2 gösterildi: 'Türkiye kaç coðrafi bölgeden oluþur?'
+2025-07-15 23:19:46,223 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:21:02,983 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:21:09,343 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 3
+2025-07-15 23:21:09,343 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:21:09,347 - INFO - Soru 1 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-15 23:21:21,127 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-15 23:21:21,128 - INFO - Soru 2 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-15 23:21:22,995 - WARNING - Soru 2 yanlýþ cevaplandý. Seçilen: A (0), Doðru: C (2). Oyun sona erdi.
+2025-07-15 23:21:22,995 - INFO - Oyun kaybedildi. Kazanýlan miktar: 0 TL.
+2025-07-15 23:21:22,999 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 0 TL.
+2025-07-15 23:21:23,002 - INFO - Oyun durumu sýfýrlandý.
+2025-07-15 23:21:23,002 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-15 23:21:26,803 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-15 23:21:26,804 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-15 23:21:27,647 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 3
+2025-07-15 23:21:27,648 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:21:27,650 - INFO - Soru 1 gösterildi: 'Halk arasýnda 'göz deðmesini önlemek' amacýyla yaygýn olarak kullanýlan bir nesnedir?'
+2025-07-15 23:21:29,294 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Nazar boncuðu).
+2025-07-15 23:21:29,295 - INFO - Soru 2 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'
+2025-07-15 23:24:57,542 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:25:03,936 - INFO - Yeni oyun baþlatýldý. Oyuncu: A A, Yaþ: 2
+2025-07-15 23:25:03,937 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:25:03,940 - INFO - Soru 1 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'
+2025-07-15 23:25:09,379 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Bukalemun gibi).
+2025-07-15 23:25:09,380 - INFO - Soru 2 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-15 23:30:50,059 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:30:56,730 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-15 23:30:56,730 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:30:56,734 - INFO - Soru 1 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-15 23:31:00,931 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 0 TL.
+2025-07-15 23:31:00,948 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 0 TL.
+2025-07-15 23:31:00,951 - INFO - Oyun durumu sýfýrlandý.
+2025-07-15 23:31:00,951 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-15 23:31:02,273 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-15 23:31:02,273 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-15 23:31:03,607 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-15 23:31:03,607 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:31:03,609 - INFO - Soru 1 gösterildi: 'Elektrik akýmýnýn birimi nedir?'
+2025-07-15 23:31:05,299 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Amper).
+2025-07-15 23:31:05,300 - INFO - Soru 2 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-15 23:31:06,935 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-15 23:31:06,935 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-15 23:31:06,937 - INFO - Soru 3 gösterildi: 'Ýlk çaðda yazýyý bulan medeniyet hangisidir?'
+2025-07-15 23:31:08,805 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Sümerler).
+2025-07-15 23:31:08,807 - INFO - Soru 4 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'
+2025-07-15 23:31:10,877 - INFO - Soru 4 doðru cevaplandý. Seçilen: C (Pasifik).
+2025-07-15 23:31:10,878 - INFO - Soru 5 gösterildi: 'Android uygulamalarý geliþtirmek için hangi programlama dili sýklýkla kullanýlýr?'
+2025-07-15 23:31:12,440 - INFO - Soru 5 doðru cevaplandý. Seçilen: A (Java).
+2025-07-15 23:31:12,442 - INFO - Soru 6 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'
+2025-07-15 23:31:14,941 - WARNING - Soru 6 yanlýþ cevaplandý. Seçilen: A (Eros), Doðru: B (Zeus). Oyun sona erdi.
+2025-07-15 23:31:21,576 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:34:55,171 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:35:01,519 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 4
+2025-07-15 23:35:01,519 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:35:01,523 - INFO - Soru 1 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-15 23:35:24,246 - INFO - Uygulama baþlatýlýyor.
+2025-07-15 23:35:30,769 - INFO - Yeni oyun baþlatýldý. Oyuncu: s s, Yaþ: 4
+2025-07-15 23:35:30,769 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:35:30,773 - INFO - Soru 1 gösterildi: 'Türkiye kaç coðrafi bölgeden oluþur?'
+2025-07-15 23:35:32,821 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (7).
+2025-07-15 23:35:32,824 - INFO - Soru 2 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-15 23:35:35,902 - WARNING - Soru 2 yanlýþ cevaplandý. Seçilen: A (0), Doðru: C (2). Oyun sona erdi.
+2025-07-15 23:35:35,903 - INFO - Oyun kaybedildi. Kazanýlan miktar: 0 TL.
+2025-07-15 23:35:35,911 - INFO - Skor veritabanýna kaydedildi: s s, Kazanç: 0 TL.
+2025-07-15 23:35:35,913 - INFO - Oyun durumu sýfýrlandý.
+2025-07-15 23:35:35,914 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-15 23:35:37,028 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-15 23:35:37,028 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-15 23:35:38,039 - INFO - Yeni oyun baþlatýldý. Oyuncu: s s, Yaþ: 4
+2025-07-15 23:35:38,039 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-15 23:35:38,042 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-15 23:35:41,841 - INFO - Soru 1 doðru cevaplandý. Seçilen: C (2).
+2025-07-15 23:35:41,843 - INFO - Soru 2 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-15 23:35:43,615 - INFO - Soru 2 doðru cevaplandý. Seçilen: A (Kalp).
+2025-07-15 23:35:43,615 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-15 23:35:43,617 - INFO - Soru 3 gösterildi: 'En uzun nehir hangisidir?'
+2025-07-15 23:35:45,126 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Nil).
+2025-07-15 23:35:45,127 - INFO - Soru 4 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'
+2025-07-15 23:35:46,687 - WARNING - Soru 4 yanlýþ cevaplandý. Seçilen: A (Atlantik), Doðru: C (Pasifik). Oyun sona erdi.
