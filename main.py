@@ -5,7 +5,7 @@ import logging
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QPushButton,QVBoxLayout, QHBoxLayout, QTableWidget, QTableWidgetItem,
     QStackedWidget, QMessageBox, QProgressBar, QGridLayout,QHeaderView, QInputDialog,QDialog) 
-from PyQt5.QtCore import Qt, QTimer,QUrl
+from PyQt5.QtCore import Qt, QTimer,QUrl, pyqtSignal
 from PyQt5.QtGui import QFont, QPixmap, QIcon
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 import matplotlib.pyplot as plt
@@ -22,6 +22,7 @@ logger = logging.getLogger(__name__)
 
 #1.PENCERE
 class FirstWindow(QWidget):
+    player_info_signal = pyqtSignal(str, str, list)
     def __init__(self, stacked_widget):
         super().__init__()
         self.stacked_widget = stacked_widget
@@ -138,7 +139,7 @@ class FirstWindow(QWidget):
         form_layout.addWidget(self.joker_person2_input, 4, 1)
         form_layout.addWidget(QLabel("Telefon Jokeri Kişi 3 (İsteğe Bağlı):"), 5, 0)
         form_layout.addWidget(self.joker_person3_input, 5, 1)
-        
+
         #başla butonu
         start_button = QPushButton("Yarışmaya Başla")
         start_button.clicked.connect(self.start_game)
@@ -235,7 +236,7 @@ class FirstWindow(QWidget):
             )
         """)
         self.conn.commit()
-        
+
     #skorları tabloya geçirme
     def load_scores(self):
         self.cursor.execute("SELECT * FROM skorlar ORDER BY id DESC")
@@ -267,12 +268,13 @@ class FirstWindow(QWidget):
             return
             
         logger.info(f"Yeni oyun başlatıldı. Oyuncu: {ad} {soyad}, Yaş: {yas}")
-        self.joker_persons = [joker_person1]
+        joker_persons_list = [joker_person1]
         if self.joker_person2_input.text().strip():
-            self.joker_persons.append(self.joker_person2_input.text().strip())
+            joker_persons_list.append(self.joker_person2_input.text().strip())
         if self.joker_person3_input.text().strip():
-            self.joker_persons.append(self.joker_person3_input.text().strip())
-    #2.pencereye geçiş
+            joker_persons_list.append(self.joker_person3_input.text().strip())
+        self.player_info_signal.emit(ad, soyad, joker_persons_list)
+        #2.pencereye geçiş
         self.stacked_widget.setCurrentIndex(1)
 
     def toggle_music(self):
@@ -417,7 +419,7 @@ class SecondWindow(QWidget):
             {"soru": "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "secenekler": ["Pac-Man", "Tabu", "Monopoly", "Mlyoner"], "dogru": "C"},
             {"soru": "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "secenekler": ["İnsan", "Fare", "Fil", "Karınca"], "dogru": "D"},
             {"soru": "Giza'da kaç tane piramit yapılmıştır?", "secenekler": ["2", "3", "4", "5"], "dogru": "B"},
-] 
+        ]
 
         self.sorular = []  
         self.init_ui()
@@ -429,8 +431,8 @@ class SecondWindow(QWidget):
             self.background_label.setPixmap(pixmap)
             self.background_label.setScaledContents(True)
         else:
-            print("Uyarı: 'image.jpg' arka plan resmi bulunamadı. Arka plan rengi kullanılacak.")
-            logger.warning("Arka plan resmi 'image.jpg' bulunamadı.")
+            print("Uyarı: 'second_image.jpg' arka plan resmi bulunamadı. Arka plan rengi kullanılacak.")
+            logger.warning("Arka plan resmi 'second_image.jpg' bulunamadı.")     
             self.background_label.setStyleSheet("background-color: #1a2a40;") # Varsayılan arka plan rengi
         self.background_label.setGeometry(0, 0, self.width(), self.height())
         self.background_label.lower()
@@ -642,7 +644,7 @@ class SecondWindow(QWidget):
         sag_layout.addLayout(self.choices_layout)
 
 
-        back_button = QPushButton("Yarış. çekl")
+        back_button = QPushButton("Yarışmadan Çekil")
         back_button.setObjectName("quit_button")
         back_button.clicked.connect(self.back_button_clicked)
         sag_layout.addWidget(back_button, alignment=Qt.AlignRight)
@@ -684,6 +686,7 @@ class SecondWindow(QWidget):
     # ekrana soruyu yazdırma + butonlara şık yerleştirme
     def start_question(self):
         self.mevcut_odulu_vurgula()
+        self.time_left = self.time_per_question
 
         if self.current_question_index >= len(self.questions):
             self.game_over(win=True)
@@ -691,7 +694,8 @@ class SecondWindow(QWidget):
 
         soru = self.questions[self.current_question_index]
         self.question_label.setText(soru["soru"])
-        logger.info(f"Soru {self.current_question_index + 1} gösterildi: '{soru['soru']}'") 
+        choices_text = ", ".join([f"{chr(65+i)}: {choice}" for i, choice in enumerate(soru['secenekler'])])
+        logger.info(f"Soru {self.current_question_index + 1} gösterildi: '{soru['soru']}'. Seçenekler: [{choices_text}]. Doğru Cevap: {soru['dogru']}")
 
         for i, btn in enumerate(self.choice_buttons):
             btn.setText(f"{chr(65+i)}: {soru['secenekler'][i]}")
@@ -702,12 +706,12 @@ class SecondWindow(QWidget):
         if self.current_question_index >= 6:
             self.timer.stop()
             self.progress.hide()
-            QMessageBox.information(self, "Bilgi", "7. sorudan itibaren süre sınırı yoktur!")
-            logger.info(f"Süre sınırı 7. sorudan itibaren kaldırıldı.") 
-            self.progress.show() 
+            logger.info(f"Süre sınırı 7. sorudan itibaren kaldırıldı.")
+            self.progress.show()
             self.time_left = self.time_per_question
             self.progress.setMaximum(self.time_per_question)
             self.progress.setValue(self.time_left)
+        else: 
             self.timer.start(1000)
 
 
@@ -734,7 +738,7 @@ class SecondWindow(QWidget):
         if secilen_harf == dogru_harf:
             self.correct_sound_player.play() # Doğru cevap sesi çal
             QMessageBox.information(self, "Doğru!", "Tebrikler! Doğru cevap.")
-            logger.info(f"Soru {self.current_question_index + 1} doğru cevaplandı. Seçilen: {secilen_harf} ({secilen_cevap_metni}).")
+            logger.info(f"Soru {self.current_question_index + 1} doğru cevaplandı. Seçilen Şık: {secilen_harf} ({secilen_cevap_metni}). Doğru Cevap: {dogru_harf} ({dogru_cevap_metni}).")  
             if self.current_question_index in self.baraj_sorulari:
                 self.last_safe_index = self.current_question_index # Baraj sorusu geçildiyse güvenli indeksi güncelle
                 logger.info(f"Baraj sorusu {self.current_question_index + 1} geçildi. Yeni güvenli ödül: {self.oduller[self.current_question_index]}.") 
@@ -746,7 +750,7 @@ class SecondWindow(QWidget):
         else:
             self.incorrect_sound_player.play()
             QMessageBox.warning(self, "Yanlış!", f"Yanlış cevap! Doğru cevap {dogru_harf}: {dogru_cevap_metni}.")
-            logger.warning(f"Soru {self.current_question_index + 1} yanlış cevaplandı. Seçilen: {secilen_harf} ({secilen_cevap_metni}), Doğru: {dogru_harf} ({dogru_cevap_metni}). Oyun sona erdi.")
+            logger.warning(f"Soru {self.current_question_index + 1} yanlış cevaplandı. Seçilen Şık: {secilen_harf} ({secilen_cevap_metni}). Doğru Cevap: {dogru_harf} ({dogru_cevap_metni}). Oyun sona erdi.")
             self.game_over(win=False)
 
     # yarı yarıya joker hakkı
@@ -762,18 +766,21 @@ class SecondWindow(QWidget):
         incorrect_indices = [i for i in range(4) if i != correct_answer_index and self.choice_buttons[i].isEnabled()]
         # En fazla 2 yanlış cevap silinmeli
         num_to_remove = min(2, len(incorrect_indices))
+        removed_choices_text = []
         if num_to_remove > 0:
             random_incorrect_to_remove = random.sample(incorrect_indices, num_to_remove)
 
             # random gelen yanlış cevapları sil
             for i in random_incorrect_to_remove:
+                removed_choices_text.append(self.choice_buttons[i].text())
                 self.choice_buttons[i].setEnabled(False)
                 self.choice_buttons[i].setText("")
 
         self.fifty_fifty_used = True
         self.joker_buttons[1].setEnabled(False)
         QMessageBox.information(self, "Yarı Yarıya", "İki yanlış cevap seçeneklerden kaldırıldı.")
-        logger.info(f"50/50 joker hakkı soru {self.current_question_index + 1} için kullanıldı.")
+        logger.info(f"50/50 joker hakkı soru {self.current_question_index + 1} için kullanıldı. Kaldırılan şıklar: {', '.join(removed_choices_text) if removed_choices_text else 'Hiç şık kaldırılmadı.'}")
+
 
     # Telefon jokeri
     def phone_lifeline(self):
@@ -795,27 +802,29 @@ class SecondWindow(QWidget):
 
             roll = random.randint(1, 10)
             response_text = ""
+            given_answer = ""
             #telefon jokeri cevap olasılıkları
             if roll <= 1:  # 1 gelirse cevap vermeesin
                 response_text = f"Merhaba, ben {person}. Üzgünüm, bu soru hakkında bilgim yok."
-                logger.info(f"Telefon jokeri kullanıldı: {person} (bilemedi).")
+                given_answer = "Bilmiyorum"
             elif roll <= 3:  # 2 veya 3 gelirse random cevap versin
                 available_choices = [i for i in range(len(current_question["secenekler"])) if self.choice_buttons[i].isEnabled()]
                 if available_choices:
                     random_choice_index = random.choice(available_choices)
                     random_answer_text = current_question["secenekler"][random_choice_index]
                     response_text = f"Merhaba, ben {person}. Bence cevap '{random_answer_text}' olabilir."
-                    logger.info(f"Telefon jokeri kullanıldı: {person} (rastgele cevap verdi).")
-                else: 
+                    given_answer = f"Rastgele: {chr(65+random_choice_index)} ({random_answer_text})"
+                else:
                     response_text = f"Merhaba, ben {person}. Tek seçenek '{correct_answer_text}' gibi görünüyor."
-                    logger.info(f"Telefon jokeri kullanıldı: {person} (tek seçenek kaldı).")
+                    given_answer = f"Tek seçenek: {current_question['dogru']} ({correct_answer_text})"
             else:  # 4,5,6,7,8,9,10 gelirse kesinlikle doğru cevabı versin
                 response_text = f"Merhaba, ben {person}. Kesinlikle '{correct_answer_text}' olmalı!"
-                logger.info(f"Telefon jokeri kullanıldı: {person} (doğru cevap verdi).") 
+                given_answer = f"Kesin: {current_question['dogru']} ({correct_answer_text})"
 
             QMessageBox.information(self, f"{person} Cevabı", response_text)
             self.phone_joker_used = True
             self.btn_phone.setEnabled(False)
+            logger.info(f"Telefon jokeri soru {self.current_question_index + 1} için kullanıldı. Arayan Kişi: {person}. Verilen Cevap: {given_answer}.")
 
     def audience_lifeline(self):
         if self.audience_joker_used:
@@ -851,7 +860,7 @@ class SecondWindow(QWidget):
             
             current_inc_sum = sum(incorrect_options_percentages)
             diff_inc = remaining_vote - current_inc_sum
-            
+
             for i in range(len(incorrect_options_percentages)):
                 if diff_inc == 0:
                     break
@@ -876,7 +885,7 @@ class SecondWindow(QWidget):
             percentages[correct_answer_index] = max(0, percentages[correct_answer_index])
 
         percentages = [int(p) for p in percentages]
-        
+
         #grafiği görüntülemek için kutu
         dialog = QDialog(self)
         dialog.setWindowTitle("Seyirci Joker Hakkı Sonuçları")
@@ -904,7 +913,8 @@ class SecondWindow(QWidget):
         plt.close(fig) 
         self.audience_joker_used = True
         self.joker_buttons[0].setEnabled(False) # Seyirci butonu
-        logger.info(f"Seyirciye sorma jokeri soru {self.current_question_index + 1} için kullanıldı. Yüzdeler: {percentages}")
+        percentages_str = ", ".join([f"{choices[i]}: {percentages[i]}%" for i in range(len(choices))])
+        logger.info(f"Seyirciye sorma jokeri soru {self.current_question_index + 1} için kullanıldı. Yüzdeler: [{percentages_str}].")
 
     # oyun bitişi ve kazanılan ödülün bildirilişi
     def game_over(self, win: bool):
@@ -912,14 +922,17 @@ class SecondWindow(QWidget):
 
         kazanc = "0 TL"
         if win:
-            kazanc = self.oduller[-1].split(': ')[1] # Son ödülü kazanmış
+            kazanc = self.oduller[-1]# Son ödülü kazanmış
             logger.info(f"Oyun kazanıldı! Kazanılan miktar: {kazanc}.") 
         else:
-            if self.last_safe_index >= 0:
-                kazanc = self.oduller[self.last_safe_index].split(': ')[1] 
+            if self.current_question_index > 0:
+                 kazanc = self.oduller[self.current_question_index - 1]
+            if self.last_safe_index != -1 and self.current_question_index > self.last_safe_index:
+                 kazanc = self.oduller[self.last_safe_index]
             logger.info(f"Oyun kaybedildi. Kazanılan miktar: {kazanc}.")
         self.save_score(kazanc)
         self.reset_game_state()
+        self.media_player.stop()
         if hasattr(self.stacked_widget.widget(2), 'display_score'):
             self.stacked_widget.widget(2).display_score(kazanc)
         self.stacked_widget.setCurrentIndex(2)
@@ -928,7 +941,7 @@ class SecondWindow(QWidget):
     def save_score(self, kazanc):
         try:
             self.cursor.execute("INSERT INTO skorlar (ad, soyad, kazanc) VALUES (?, ?, ?)",
-                                (self.player_name, self.player_surname, kazanc))
+                                 (self.player_name, self.player_surname, kazanc))
             self.conn.commit()
             logger.info(f"Skor veritabanına kaydedildi: {self.player_name} {self.player_surname}, Kazanç: {kazanc}.")
         except sqlite3.Error as e:
@@ -948,9 +961,28 @@ class SecondWindow(QWidget):
         # Tüm joker butonlarını tekrar etkinleştir
         for btn in self.joker_buttons:
             btn.setEnabled(True)
+            if btn.objectName() == "btn_phone":
+                pixmap_phone = QPixmap("phone_call_joker.png")
+                if not pixmap_phone.isNull():
+                    pixmap_phone = pixmap_phone.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                    btn.setIcon(QIcon(pixmap_phone))
+            elif btn.objectName() == "btn_fifty_fifty":
+                pixmap_fifty_fifty = QPixmap("50_joker.png")
+                if not pixmap_fifty_fifty.isNull():
+                    pixmap_fifty_fifty = pixmap_fifty_fifty.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                    btn.setIcon(QIcon(pixmap_fifty_fifty))
+            elif btn.objectName() == "btn_audience":
+                pixmap_audience = QPixmap("person_joker.png")
+                if not pixmap_audience.isNull():
+                    pixmap_audience = pixmap_audience.scaled(40, 40, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                    btn.setIcon(QIcon(pixmap_audience))
+            btn.setStyleSheet("background-color: #6c757d; hover:background-color: #b31942; border-radius: 30px; border: 2px solid #5a6268;")
+
+
         for btn in self.choice_buttons:
             btn.setText("")
             btn.setEnabled(True)
+            btn.setStyleSheet("background-color:#201f80; hover:background-color: #100f47; color: white; border: none; border-radius: 10px; padding: 15px 25px; font-size: 14pt; font-weight: bold; min-width: 150px;")
         self.progress.show() # Zamanlayıcıyı tekrar göster
         self.mevcut_odulu_vurgula() 
         logger.info("Oyun durumu sıfırlandı.")
@@ -959,8 +991,9 @@ class SecondWindow(QWidget):
     def back_button_clicked(self):
         # Yarışmadan çekil butonu
         self.timer.stop() # Zamanlayıcıyı durdu
+        kazanc = "0 TL"
         if self.current_question_index > 0:
-            kazanc = self.oduller[self.current_question_index - 1].split(': ')[1]
+            kazanc = self.oduller[self.current_question_index - 1]
         reply = QMessageBox.question(
             self,
             "Yarışmadan Çekil",
@@ -973,6 +1006,7 @@ class SecondWindow(QWidget):
             self.save_score(kazanc)
             self.reset_game_state() # Oyun durumunu sıfırla
             # Üçüncü pencereye geçiş yap ve kazancı göster
+            self.media_player.stop()
             if hasattr(self.stacked_widget.widget(2), 'display_score'):
                 self.stacked_widget.widget(2).display_score(kazanc)
             self.stacked_widget.setCurrentIndex(2) # Üçüncü pencereye geç
@@ -981,8 +1015,6 @@ class SecondWindow(QWidget):
             # Eğer kullanıcı çekilmek istemezse ve zamanlayıcı daha önce durdurulmamışsa tekrar başlat
             if self.current_question_index < 6: # Sadece ilk 6 soru için zamanlayıcıyı tekrar başlat
                 self.timer.start(1000)
-    def set_stacked_widget(self, stacked_widget):
-        self.stacked_widget = stacked_widget
 
     def toggle_music(self):
         if self.media_player.state() == QMediaPlayer.PlayingState:
@@ -1031,8 +1063,8 @@ class ThirdWindow(QWidget):
             self.background_label.setPixmap(pixmap)
             self.background_label.setScaledContents(True)
         else:
-            print("Uyarı: 'image.jpg' arka plan resmi bulunamadı. Arka plan rengi kullanılacak.")
-            logger.warning("Arka plan resmi 'image.jpg' bulunamadı.")
+            print("Uyarı: 'third_image.png' arka plan resmi bulunamadı. Arka plan rengi kullanılacak.") 
+            logger.warning("Arka plan resmi 'third_image.png' bulunamadı.")
             self.background_label.setStyleSheet("background-color: #2c3e50;") 
         self.background_label.setGeometry(0, 0, self.width(), self.height())
         self.background_label.lower() 
@@ -1147,7 +1179,7 @@ class ThirdWindow(QWidget):
             logger.info("Müzik duraklatıldı (ThirdWindow).")
         else:
             self.media_player.play()
-            logger.info("Müzik oynatılıyor (ThirdWindow).") 
+            logger.info("Müzik oynatılıyor (ThirdWindow).")
         self.update_sound_button_icon()
 
     def update_sound_button_icon(self):
@@ -1179,10 +1211,18 @@ class MainApp(QStackedWidget):
         self.addWidget(self.first)
         self.addWidget(self.second)
         self.addWidget(self.third)
+        self.first.player_info_signal.connect(self.set_second_window_player_info)
 
         self.setWindowTitle("Kim Milyoner Olmak İster?")
         self.resize(1000, 750)
         self.first.media_player.play()# Uygulama başladığında ilk pencerenin müziğini çal
+
+    def set_second_window_player_info(self, ad, soyad, joker_persons_list):
+        """FirstWindow'dan gelen oyuncu bilgilerini SecondWindow'a aktarır."""
+        self.second.player_name = ad
+        self.second.player_surname = soyad
+        self.second.joker_persons = joker_persons_list
+        logger.info(f"SecondWindow oyuncu bilgileri güncellendi: {ad} {soyad}, Jokerler: {joker_persons_list}")
 
     def setCurrentIndex(self, index: int) -> None:
         current_window = self.currentWidget()
@@ -1190,15 +1230,17 @@ class MainApp(QStackedWidget):
         logger.info(f"Pencere değişimi: {type(current_window).__name__} -> {type(target_window).__name__}")
 
         if hasattr(current_window, 'media_player') and current_window.media_player.state() == QMediaPlayer.PlayingState:
-            current_window.media_player.pause()
+            current_window.media_player.stop() 
 
         super().setCurrentIndex(index)
 
         if hasattr(target_window, 'media_player'):
             if target_window.media_player.state() != QMediaPlayer.PlayingState:
-                if not QUrl.fromLocalFile(target_window.music_file).isValid():
+                if QUrl.fromLocalFile(target_window.music_file).isValid():
+                    target_window.media_player.play()
+                else:
                     print(f"Müzik dosyası bulunamadı {type(target_window).__name__}: {target_window.music_file}")
-                target_window.media_player.play()
+                    logger.warning(f"Müzik dosyası bulunamadı: {target_window.music_file}")
 
         self.first.update_sound_button_icon()
         self.second.update_sound_button_icon()
@@ -1206,12 +1248,11 @@ class MainApp(QStackedWidget):
 
 
         if index == 1:
-            first_window = self.widget(0)
-            self.second.player_name = first_window.name_input.text()
-            self.second.player_surname = first_window.surname_input.text()
-            self.second.joker_persons = first_window.joker_persons
             self.second.levele_gore_soru_secimi()
             self.second.start_question()
+        elif index == 0:
+            self.first.load_scores()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

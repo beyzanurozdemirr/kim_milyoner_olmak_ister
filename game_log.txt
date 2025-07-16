@@ -99,3 +99,402 @@
 2025-07-15 23:35:45,126 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Nil).
 2025-07-15 23:35:45,127 - INFO - Soru 4 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'
 2025-07-15 23:35:46,687 - WARNING - Soru 4 yanlýþ cevaplandý. Seçilen: A (Atlantik), Doðru: C (Pasifik). Oyun sona erdi.
+2025-07-16 15:45:51,672 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:46:01,540 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:46:01,541 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:46:01,545 - INFO - Soru 1 gösterildi: 'Halk arasýnda 'göz deðmesini önlemek' amacýyla yaygýn olarak kullanýlan bir nesnedir?'
+2025-07-16 15:46:03,404 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Nazar boncuðu).
+2025-07-16 15:46:03,406 - INFO - Soru 2 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-16 15:51:34,232 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:51:40,818 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:51:40,819 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:51:40,822 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-16 15:51:43,174 - INFO - Soru 1 doðru cevaplandý. Seçilen: C (2).
+2025-07-16 15:51:43,177 - INFO - Soru 2 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-16 15:51:46,257 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 1.000 TL.
+2025-07-16 15:51:46,272 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 1.000 TL.
+2025-07-16 15:51:46,275 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:51:46,275 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:51:47,227 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-16 15:51:47,227 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-16 15:51:48,331 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:51:48,331 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:51:48,333 - INFO - Soru 1 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-16 15:51:50,466 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-16 15:51:50,468 - INFO - Soru 2 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'
+2025-07-16 15:51:52,579 - INFO - Soru 2 doðru cevaplandý. Seçilen: D (11).
+2025-07-16 15:51:52,580 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:51:52,582 - INFO - Soru 3 gösterildi: 'DNA'nýn açýlýmý nedir?'
+2025-07-16 15:51:54,013 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Deoksiribonükleik Asit).
+2025-07-16 15:51:54,015 - INFO - Soru 4 gösterildi: 'Fatih Sultan Mehmet’in babasý kimdir?'
+2025-07-16 15:51:55,729 - WARNING - Soru 4 yanlýþ cevaplandý. Seçilen: C (II.Mehmet), Doðru: B (II.Murad). Oyun sona erdi.
+2025-07-16 15:52:02,887 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:52:11,343 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 4
+2025-07-16 15:52:11,343 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:52:11,346 - INFO - Soru 1 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-16 15:52:13,739 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-16 15:52:13,741 - INFO - Soru 2 gösterildi: 'Halk arasýnda 'göz deðmesini önlemek' amacýyla yaygýn olarak kullanýlan bir nesnedir?'
+2025-07-16 15:52:15,608 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Nazar boncuðu).
+2025-07-16 15:52:15,608 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:52:15,610 - INFO - Soru 3 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'
+2025-07-16 15:52:17,649 - WARNING - Soru 3 yanlýþ cevaplandý. Seçilen: B (Hint), Doðru: C (Pasifik). Oyun sona erdi.
+2025-07-16 15:52:23,079 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:52:27,851 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 3
+2025-07-16 15:52:27,851 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:52:27,854 - INFO - Soru 1 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'
+2025-07-16 15:52:29,826 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Bukalemun gibi).
+2025-07-16 15:52:29,827 - INFO - Soru 2 gösterildi: 'Elektrik akýmýnýn birimi nedir?'
+2025-07-16 15:52:31,284 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Amper).
+2025-07-16 15:52:31,284 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:52:31,285 - INFO - Soru 3 gösterildi: 'DNA'nýn açýlýmý nedir?'
+2025-07-16 15:52:32,386 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Deoksiribonükleik Asit).
+2025-07-16 15:52:32,387 - INFO - Soru 4 gösterildi: 'Fatih Sultan Mehmet’in babasý kimdir?'
+2025-07-16 15:52:34,154 - INFO - Soru 4 doðru cevaplandý. Seçilen: B (II.Murad).
+2025-07-16 15:52:34,155 - INFO - Soru 5 gösterildi: 'Türkiye'nin en uzun nehri hangisidir?'
+2025-07-16 15:52:36,690 - INFO - Soru 5 doðru cevaplandý. Seçilen: A (Kýzýlýrmak).
+2025-07-16 15:52:36,691 - INFO - Soru 6 gösterildi: 'Iþýk hýzý saniyede kaç kilometredir?'
+2025-07-16 15:52:42,093 - INFO - Soru 6 doðru cevaplandý. Seçilen: A (300,000 km/s).
+2025-07-16 15:52:42,095 - INFO - Soru 7 gösterildi: 'Dünyanýn en derin noktasý neresidir?'
+2025-07-16 15:52:44,001 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:52:45,874 - INFO - Soru 7 doðru cevaplandý. Seçilen: A (Mariana Çukuru).
+2025-07-16 15:52:45,874 - INFO - Baraj sorusu 7 geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 15:52:45,876 - INFO - Soru 8 gösterildi: 'Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanýlýr?'
+2025-07-16 15:52:46,597 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:52:50,258 - INFO - Oyuncu yarýþmadan çekilmekten vazgeçti.
+2025-07-16 15:52:54,008 - INFO - Soru 8 doðru cevaplandý. Seçilen: B (Direnç).
+2025-07-16 15:52:54,010 - INFO - Soru 9 gösterildi: 'Müzeyyen Senar hangi dönemde ün kazanmýþtýr?'
+2025-07-16 15:52:54,961 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:53:00,720 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 60.000 TL.
+2025-07-16 15:53:00,736 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 60.000 TL.
+2025-07-16 15:53:00,739 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:53:00,740 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:53:49,181 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:53:55,475 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:53:55,476 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['d']
+2025-07-16 15:53:55,476 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:53:55,483 - INFO - Soru 1 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'
+2025-07-16 15:53:57,870 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Bukalemun gibi).
+2025-07-16 15:53:57,872 - INFO - Soru 2 gösterildi: 'Güneþ'e en yakýn gezegen hangisidir?'
+2025-07-16 15:53:59,938 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Merkür).
+2025-07-16 15:53:59,939 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:53:59,940 - INFO - Soru 3 gösterildi: 'En uzun nehir hangisidir?'
+2025-07-16 15:54:01,804 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Nil).
+2025-07-16 15:54:01,806 - INFO - Soru 4 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'
+2025-07-16 15:54:04,403 - INFO - Soru 4 doðru cevaplandý. Seçilen: D (Tiramisu).
+2025-07-16 15:54:04,404 - INFO - Soru 5 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'
+2025-07-16 15:54:06,600 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 5.000 TL.
+2025-07-16 15:54:06,609 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 5.000 TL.
+2025-07-16 15:54:06,615 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:54:06,616 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:54:07,324 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-16 15:54:07,325 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-16 15:54:08,365 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:54:08,365 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['d']
+2025-07-16 15:54:08,365 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:54:08,369 - INFO - Soru 1 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-16 15:54:10,389 - WARNING - Soru 1 yanlýþ cevaplandý. Seçilen: C (Akciðer), Doðru: A (Kalp). Oyun sona erdi.
+2025-07-16 15:54:10,389 - INFO - Oyun kaybedildi. Kazanýlan miktar: 0 TL.
+2025-07-16 15:54:10,394 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 0 TL.
+2025-07-16 15:54:10,401 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:54:10,402 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:54:11,371 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-16 15:54:11,371 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-16 15:54:12,087 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 2
+2025-07-16 15:54:12,087 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['d']
+2025-07-16 15:54:12,087 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:54:12,092 - INFO - Soru 1 gösterildi: 'Hangi organýn dört odasý vardýr?'
+2025-07-16 15:54:13,536 - INFO - Soru 1 doðru cevaplandý. Seçilen: A (Kalp).
+2025-07-16 15:54:13,537 - INFO - Soru 2 gösterildi: 'Elektrik akýmýnýn birimi nedir?'
+2025-07-16 15:54:15,130 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Amper).
+2025-07-16 15:54:15,130 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:54:15,132 - INFO - Soru 3 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'
+2025-07-16 15:54:17,253 - INFO - Soru 3 doðru cevaplandý. Seçilen: D (Tiramisu).
+2025-07-16 15:54:17,254 - INFO - Soru 4 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'
+2025-07-16 15:54:21,402 - INFO - Soru 4 doðru cevaplandý. Seçilen: C (Pasifik).
+2025-07-16 15:54:21,404 - INFO - Soru 5 gösterildi: 'Android uygulamalarý geliþtirmek için hangi programlama dili sýklýkla kullanýlýr?'
+2025-07-16 15:54:23,792 - INFO - Soru 5 doðru cevaplandý. Seçilen: A (Java).
+2025-07-16 15:54:23,794 - INFO - Soru 6 gösterildi: 'Porsche logosunda hangi hayvan görülebilir?'
+2025-07-16 15:54:32,244 - INFO - Soru 6 doðru cevaplandý. Seçilen: D (At).
+2025-07-16 15:54:32,247 - INFO - Soru 7 gösterildi: 'Hangisi Türkiye'de UNESCO Dünya Mirasý Listesi'nde yer alan bir antik kenttir?'
+2025-07-16 15:54:33,115 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:54:41,018 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 15.000 TL.
+2025-07-16 15:54:41,024 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 15.000 TL.
+2025-07-16 15:54:41,029 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:54:41,030 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:54:43,121 - INFO - Oyuncu 'Oyundan Çýk' butonuna týkladý. Uygulama kapatýlýyor.
+2025-07-16 15:58:22,745 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 15:58:27,336 - INFO - Müzik duraklatýldý (FirstWindow).
+2025-07-16 15:58:27,745 - INFO - Müzik oynatýlýyor (FirstWindow).
+2025-07-16 15:58:35,796 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 1
+2025-07-16 15:58:35,797 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['s', 'sas', 'aa']
+2025-07-16 15:58:35,797 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:58:35,815 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-16 15:58:40,093 - INFO - Soru 1 doðru cevaplandý. Seçilen: C (2).
+2025-07-16 15:58:40,095 - INFO - Soru 2 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'
+2025-07-16 15:58:43,795 - INFO - Soru 2 doðru cevaplandý. Seçilen: D (11).
+2025-07-16 15:58:43,796 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:58:43,797 - INFO - Soru 3 gösterildi: 'En uzun nehir hangisidir?'
+2025-07-16 15:58:45,519 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Nil).
+2025-07-16 15:58:45,522 - INFO - Soru 4 gösterildi: 'DNA'nýn açýlýmý nedir?'
+2025-07-16 15:58:47,137 - INFO - Soru 4 doðru cevaplandý. Seçilen: A (Deoksiribonükleik Asit).
+2025-07-16 15:58:47,138 - INFO - Soru 5 gösterildi: 'Porsche logosunda hangi hayvan görülebilir?'
+2025-07-16 15:58:48,975 - INFO - Soru 5 doðru cevaplandý. Seçilen: D (At).
+2025-07-16 15:58:48,977 - INFO - Soru 6 gösterildi: 'Türkiye'nin en uzun nehri hangisidir?'
+2025-07-16 15:58:50,751 - INFO - Soru 6 doðru cevaplandý. Seçilen: A (Kýzýlýrmak).
+2025-07-16 15:58:50,753 - INFO - Soru 7 gösterildi: 'Penisilini kim keþfetti?'
+2025-07-16 15:58:53,221 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:01,163 - INFO - Soru 7 doðru cevaplandý. Seçilen: D (Alexander Fleming).
+2025-07-16 15:59:01,164 - INFO - Baraj sorusu 7 geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 15:59:01,166 - INFO - Soru 8 gösterildi: 'Hangisi Türkiye'de UNESCO Dünya Mirasý Listesi'nde yer alan bir antik kenttir?'
+2025-07-16 15:59:02,255 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:10,699 - INFO - Seyirciye sorma jokeri soru 8 için kullanýldý. Yüzdeler: [32, 17, 18, 33]
+2025-07-16 15:59:12,474 - INFO - Soru 8 doðru cevaplandý. Seçilen: D (Hepsi).
+2025-07-16 15:59:12,476 - INFO - Soru 9 gösterildi: 'Marvel sinematik evreninde 'Kaptan Amerika' karakterini canlandýran oyuncu kimdir?'
+2025-07-16 15:59:13,400 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:14,903 - INFO - 50/50 joker hakký soru 9 için kullanýldý.
+2025-07-16 15:59:16,007 - INFO - Soru 9 doðru cevaplandý. Seçilen: C (Chris Evans).
+2025-07-16 15:59:16,009 - INFO - Soru 10 gösterildi: 'Genellikle 'Pop'un Kralý' olarak anýlan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanýlan sanatçý kimdir?'
+2025-07-16 15:59:17,457 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:18,890 - INFO - Telefon jokeri kullanýldý: s (doðru cevap verdi).
+2025-07-16 15:59:24,157 - INFO - Oyuncu yarýþmadan çekildi. Kazanýlan miktar: 125.000 TL.
+2025-07-16 15:59:24,170 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 125.000 TL.
+2025-07-16 15:59:24,176 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 15:59:24,178 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 15:59:26,569 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-16 15:59:26,569 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-16 15:59:27,475 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 1
+2025-07-16 15:59:27,475 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['s', 'sas', 'aa']
+2025-07-16 15:59:27,475 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 15:59:27,479 - INFO - Soru 1 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'
+2025-07-16 15:59:30,349 - INFO - Soru 1 doðru cevaplandý. Seçilen: D (11).
+2025-07-16 15:59:30,351 - INFO - Soru 2 gösterildi: 'Türkiye kaç coðrafi bölgeden oluþur?'
+2025-07-16 15:59:35,441 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (7).
+2025-07-16 15:59:35,441 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 15:59:35,443 - INFO - Soru 3 gösterildi: 'En uzun nehir hangisidir?'
+2025-07-16 15:59:38,058 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Nil).
+2025-07-16 15:59:38,059 - INFO - Soru 4 gösterildi: 'DNA'nýn açýlýmý nedir?'
+2025-07-16 15:59:39,332 - INFO - Soru 4 doðru cevaplandý. Seçilen: A (Deoksiribonükleik Asit).
+2025-07-16 15:59:39,334 - INFO - Soru 5 gösterildi: 'Divan-ý Lügatit Türk adlý eserin yazarý kimdir?'
+2025-07-16 15:59:40,822 - INFO - Soru 5 doðru cevaplandý. Seçilen: A (Kaþgarlý Mahmut).
+2025-07-16 15:59:40,823 - INFO - Soru 6 gösterildi: 'Iþýk hýzý saniyede kaç kilometredir?'
+2025-07-16 15:59:42,671 - INFO - Soru 6 doðru cevaplandý. Seçilen: A (300,000 km/s).
+2025-07-16 15:59:42,673 - INFO - Soru 7 gösterildi: 'Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?'
+2025-07-16 15:59:43,571 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:48,912 - INFO - Soru 7 doðru cevaplandý. Seçilen: C (Kuantum Fiziði).
+2025-07-16 15:59:48,912 - INFO - Baraj sorusu 7 geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 15:59:48,914 - INFO - Soru 8 gösterildi: 'Penisilini kim keþfetti?'
+2025-07-16 15:59:49,520 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:51,330 - INFO - Soru 8 doðru cevaplandý. Seçilen: D (Alexander Fleming).
+2025-07-16 15:59:51,332 - INFO - Soru 9 gösterildi: 'Thor hangi Tanrý'nýn oðluydu?'
+2025-07-16 15:59:52,011 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:53,690 - INFO - Soru 9 doðru cevaplandý. Seçilen: A (Odin).
+2025-07-16 15:59:53,691 - INFO - Soru 10 gösterildi: 'Müzeyyen Senar hangi dönemde ün kazanmýþtýr?'
+2025-07-16 15:59:54,387 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 15:59:57,404 - INFO - Soru 10 doðru cevaplandý. Seçilen: B (1940'lar).
+2025-07-16 15:59:57,405 - INFO - Soru 11 gösterildi: 'Kur'an-ý Kerim'de hangisi üzerine yemin edilmemiþtir?'
+2025-07-16 15:59:58,170 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:00:01,119 - INFO - Soru 11 doðru cevaplandý. Seçilen: C (Arý).
+2025-07-16 16:00:01,120 - INFO - Soru 12 gösterildi: 'Cumhurbaþkanlýðý forsu ve armasýndaki 16 Türk devleti arasýnda hangisi yoktur?'
+2025-07-16 16:00:01,981 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:00:03,857 - WARNING - Soru 12 yanlýþ cevaplandý. Seçilen: B (Harzemþahlar), Doðru: D (Anadolu Selçuklu Devleti). Oyun sona erdi.
+2025-07-16 16:00:03,857 - INFO - Oyun kaybedildi. Kazanýlan miktar: 30.000 TL.
+2025-07-16 16:00:03,863 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 30.000 TL.
+2025-07-16 16:00:03,869 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 16:00:03,872 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 16:11:31,436 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:11:37,805 - INFO - Yeni oyun baþlatýldý. Oyuncu: s a, Yaþ: 3
+2025-07-16 16:11:37,805 - INFO - SecondWindow oyuncu bilgileri güncellendi: s a, Jokerler: ['d']
+2025-07-16 16:11:37,806 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:11:37,824 - INFO - Soru 1 gösterildi: 'Elektrik akýmýnýn birimi nedir?'
+2025-07-16 16:11:40,315 - INFO - Soru 1 doðru cevaplandý. Seçilen: B (Amper).
+2025-07-16 16:11:40,317 - INFO - Soru 2 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'
+2025-07-16 16:11:42,283 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (Bukalemun gibi).
+2025-07-16 16:11:42,283 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:11:42,285 - INFO - Soru 3 gösterildi: 'Ýlk çaðda yazýyý bulan medeniyet hangisidir?'
+2025-07-16 16:11:44,271 - INFO - Soru 3 doðru cevaplandý. Seçilen: A (Sümerler).
+2025-07-16 16:11:44,273 - INFO - Soru 4 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'
+2025-07-16 16:11:47,988 - INFO - Soru 4 doðru cevaplandý. Seçilen: D (Tiramisu).
+2025-07-16 16:11:47,990 - INFO - Soru 5 gösterildi: 'Divan-ý Lügatit Türk adlý eserin yazarý kimdir?'
+2025-07-16 16:11:49,921 - INFO - Soru 5 doðru cevaplandý. Seçilen: A (Kaþgarlý Mahmut).
+2025-07-16 16:11:49,923 - INFO - Soru 6 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'
+2025-07-16 16:11:51,920 - WARNING - Soru 6 yanlýþ cevaplandý. Seçilen: A (Eros), Doðru: B (Zeus). Oyun sona erdi.
+2025-07-16 16:11:51,921 - INFO - Oyun kaybedildi. Kazanýlan miktar: 2.000 TL.
+2025-07-16 16:11:51,939 - INFO - Skor veritabanýna kaydedildi: s a, Kazanç: 2.000 TL.
+2025-07-16 16:11:51,944 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 16:11:51,946 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 16:11:53,480 - INFO - Oyuncu 'Tekrar Oyna' butonuna týkladý. Ýlk pencereye dönülüyor.
+2025-07-16 16:11:53,480 - INFO - Pencere deðiþimi: ThirdWindow -> FirstWindow
+2025-07-16 16:11:54,133 - INFO - Yeni oyun baþlatýldý. Oyuncu: s a, Yaþ: 3
+2025-07-16 16:11:54,133 - INFO - SecondWindow oyuncu bilgileri güncellendi: s a, Jokerler: ['d']
+2025-07-16 16:11:54,134 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:11:54,139 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'
+2025-07-16 16:11:57,422 - INFO - Soru 1 doðru cevaplandý. Seçilen: C (2).
+2025-07-16 16:11:57,423 - INFO - Soru 2 gösterildi: 'Türkiye kaç coðrafi bölgeden oluþur?'
+2025-07-16 16:12:00,123 - INFO - Soru 2 doðru cevaplandý. Seçilen: B (7).
+2025-07-16 16:12:00,123 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:12:00,124 - INFO - Soru 3 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'
+2025-07-16 16:12:02,057 - INFO - Soru 3 doðru cevaplandý. Seçilen: D (Tiramisu).
+2025-07-16 16:12:02,058 - INFO - Soru 4 gösterildi: 'DNA'nýn açýlýmý nedir?'
+2025-07-16 16:12:03,839 - INFO - Soru 4 doðru cevaplandý. Seçilen: A (Deoksiribonükleik Asit).
+2025-07-16 16:12:03,840 - INFO - Soru 5 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'
+2025-07-16 16:12:13,206 - INFO - 50/50 joker hakký soru 5 için kullanýldý.
+2025-07-16 16:12:15,460 - INFO - Seyirciye sorma jokeri soru 5 için kullanýldý. Yüzdeler: [15, 33, 26, 26]
+2025-07-16 16:12:16,568 - INFO - Soru 5 doðru cevaplandý. Seçilen: B (Zeus).
+2025-07-16 16:12:16,570 - INFO - Soru 6 gösterildi: 'Android uygulamalarý geliþtirmek için hangi programlama dili sýklýkla kullanýlýr?'
+2025-07-16 16:12:20,440 - INFO - Soru 6 doðru cevaplandý. Seçilen: A (Java).
+2025-07-16 16:12:20,441 - INFO - Soru 7 gösterildi: 'Hangisi Türkiye'de UNESCO Dünya Mirasý Listesi'nde yer alan bir antik kenttir?'
+2025-07-16 16:12:24,758 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:12:36,941 - INFO - Soru 7 doðru cevaplandý. Seçilen: D (Hepsi).
+2025-07-16 16:12:36,941 - INFO - Baraj sorusu 7 geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 16:12:36,942 - INFO - Soru 8 gösterildi: 'Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?'
+2025-07-16 16:12:37,859 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:17:07,237 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:17:14,061 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 3
+2025-07-16 16:17:14,062 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['d', 'd']
+2025-07-16 16:17:14,063 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:17:14,082 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'. Seçenekler: [A: 0, B: 1, C: 2, D: 3]. Doðru Cevap: C
+2025-07-16 16:17:16,119 - INFO - Soru 1 doðru cevaplandý. Seçilen Þýk: C (2). Doðru Cevap: C (2).
+2025-07-16 16:17:16,121 - INFO - Soru 2 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'. Seçenekler: [A: Þempanze gibi, B: Bukalemun gibi, C: Bizon gibi, D: Komodo ejderi gibi]. Doðru Cevap: B
+2025-07-16 16:17:18,075 - INFO - Soru 2 doðru cevaplandý. Seçilen Þýk: B (Bukalemun gibi). Doðru Cevap: B (Bukalemun gibi).
+2025-07-16 16:17:18,076 - INFO - Baraj sorusu 2 baþarýyla geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:17:18,077 - INFO - Soru 3 gösterildi: 'DNA'nýn açýlýmý nedir?'. Seçenekler: [A: Deoksiribonükleik Asit, B: Dijital Nükleer Asit, C: Dinamik Nöroaktif Asit, D: Diyot Nöron Aktarýcý]. Doðru Cevap: A
+2025-07-16 16:17:19,958 - INFO - Soru 3 doðru cevaplandý. Seçilen Þýk: A (Deoksiribonükleik Asit). Doðru Cevap: A (Deoksiribonükleik Asit).
+2025-07-16 16:17:19,960 - INFO - Soru 4 gösterildi: 'Fatih Sultan Mehmet’in babasý kimdir?'. Seçenekler: [A: I.Mehmet, B: II.Murad, C: II.Mehmet, D: Yýldýrým Beyazýt]. Doðru Cevap: B
+2025-07-16 16:17:22,671 - INFO - Seyirciye sorma jokeri soru 4 için kullanýldý. Yüzdeler: [A: 22%, B: 32%, C: 21%, D: 25%].
+2025-07-16 16:17:24,045 - INFO - Soru 4 doðru cevaplandý. Seçilen Þýk: B (II.Murad). Doðru Cevap: B (II.Murad).
+2025-07-16 16:17:24,047 - INFO - Soru 5 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'. Seçenekler: [A: Eros, B: Zeus, C: Ýlyada, D: Herkül]. Doðru Cevap: B
+2025-07-16 16:17:25,755 - INFO - 50/50 joker hakký soru 5 için kullanýldý. Kaldýrýlan þýklar: A: Eros, C: Ýlyada
+2025-07-16 16:17:32,787 - INFO - Soru 5 doðru cevaplandý. Seçilen Þýk: B (Zeus). Doðru Cevap: B (Zeus).
+2025-07-16 16:17:32,789 - INFO - Soru 6 gösterildi: 'Türkiye'nin en uzun nehri hangisidir?'. Seçenekler: [A: Kýzýlýrmak, B: Fýrat, C: Dicle, D: Yeþilýrmak]. Doðru Cevap: A
+2025-07-16 16:17:38,348 - INFO - Telefon jokeri soru 6 için kullanýldý. Arayan Kiþi: d. Verilen Cevap: Rastgele: D (Yeþilýrmak).
+2025-07-16 16:17:41,369 - INFO - Soru 6 doðru cevaplandý. Seçilen Þýk: A (Kýzýlýrmak). Doðru Cevap: A (Kýzýlýrmak).
+2025-07-16 16:17:41,370 - INFO - Soru 7 gösterildi: 'Kuzey Iþýklarý olarak bilinen doða olayý hangi gezegenin manyetik alanýyla ilgilidir?'. Seçenekler: [A: Mars, B: Merkür, C: Dünya, D: Uranüs]. Doðru Cevap: C
+2025-07-16 16:17:42,420 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:17:55,205 - INFO - Soru 7 doðru cevaplandý. Seçilen Þýk: C (Dünya). Doðru Cevap: C (Dünya).
+2025-07-16 16:17:55,205 - INFO - Baraj sorusu 7 baþarýyla geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 16:17:55,207 - INFO - Soru 8 gösterildi: 'Hangisi Türkiye'de UNESCO Dünya Mirasý Listesi'nde yer alan bir antik kenttir?'. Seçenekler: [A: Çatalhöyük, B: Ani Harabeleri, C: Göbekli Tepe, D: Hepsi]. Doðru Cevap: D
+2025-07-16 16:17:55,853 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:18:03,342 - INFO - Soru 8 doðru cevaplandý. Seçilen Þýk: D (Hepsi). Doðru Cevap: D (Hepsi).
+2025-07-16 16:18:03,344 - INFO - Soru 9 gösterildi: 'Hangi popüler TV dizisinde Targaryen ve Stark hanedaný yer aldý?'. Seçenekler: [A: Game of Thrones, B: House of the Dragon, C: The Walking Dead, D: Supernatural]. Doðru Cevap: A
+2025-07-16 16:18:03,960 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:18:08,594 - INFO - Soru 9 doðru cevaplandý. Seçilen Þýk: A (Game of Thrones). Doðru Cevap: A (Game of Thrones).
+2025-07-16 16:18:08,595 - INFO - Soru 10 gösterildi: 'Thor hangi Tanrý'nýn oðluydu?'. Seçenekler: [A: Odin, B: Loki, C: Zeus, D: Hades]. Doðru Cevap: A
+2025-07-16 16:18:09,724 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:18:11,216 - WARNING - Soru 10 yanlýþ cevaplandý. Seçilen Þýk: C (Zeus). Doðru Cevap: A (Odin). Oyun sona erdi.
+2025-07-16 16:18:11,216 - INFO - Oyun kaybedildi. Kazanýlan miktar: 30.000 TL.
+2025-07-16 16:18:11,232 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 30.000 TL.
+2025-07-16 16:18:11,237 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 16:18:11,239 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 16:21:10,049 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:21:15,806 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 3
+2025-07-16 16:21:15,806 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['f', 'f']
+2025-07-16 16:21:15,807 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:21:15,827 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'. Seçenekler: [A: 0, B: 1, C: 2, D: 3]. Doðru Cevap: C
+2025-07-16 16:21:17,645 - INFO - Soru 1 doðru cevaplandý. Seçilen Þýk: C (2). Doðru Cevap: C (2).
+2025-07-16 16:21:17,647 - INFO - Soru 2 gösterildi: 'Hangi organýn dört odasý vardýr?'. Seçenekler: [A: Kalp, B: Mide, C: Akciðer, D: Karaciðer]. Doðru Cevap: A
+2025-07-16 16:21:19,465 - INFO - Soru 2 doðru cevaplandý. Seçilen Þýk: A (Kalp). Doðru Cevap: A (Kalp).
+2025-07-16 16:21:19,465 - INFO - Baraj sorusu 2 baþarýyla geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:21:19,467 - INFO - Soru 3 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'. Seçenekler: [A: Atlantik, B: Hint, C: Pasifik, D: Arktik]. Doðru Cevap: C
+2025-07-16 16:21:21,718 - INFO - Soru 3 doðru cevaplandý. Seçilen Þýk: C (Pasifik). Doðru Cevap: C (Pasifik).
+2025-07-16 16:21:21,720 - INFO - Soru 4 gösterildi: 'En uzun nehir hangisidir?'. Seçenekler: [A: Nil, B: Amazon, C: Yangtze, D: Mississippi]. Doðru Cevap: A
+2025-07-16 16:21:24,039 - INFO - Soru 4 doðru cevaplandý. Seçilen Þýk: A (Nil). Doðru Cevap: A (Nil).
+2025-07-16 16:21:24,042 - INFO - Soru 5 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'. Seçenekler: [A: Eros, B: Zeus, C: Ýlyada, D: Herkül]. Doðru Cevap: B
+2025-07-16 16:21:26,139 - INFO - Soru 5 doðru cevaplandý. Seçilen Þýk: B (Zeus). Doðru Cevap: B (Zeus).
+2025-07-16 16:21:26,140 - INFO - Soru 6 gösterildi: 'Türkiye'nin en uzun nehri hangisidir?'. Seçenekler: [A: Kýzýlýrmak, B: Fýrat, C: Dicle, D: Yeþilýrmak]. Doðru Cevap: A
+2025-07-16 16:21:27,632 - INFO - Soru 6 doðru cevaplandý. Seçilen Þýk: A (Kýzýlýrmak). Doðru Cevap: A (Kýzýlýrmak).
+2025-07-16 16:21:27,634 - INFO - Soru 7 gösterildi: 'Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanýlýr?'. Seçenekler: [A: Sabýrsýzlýk, B: Direnç, C: Hýz, D: Uyum]. Doðru Cevap: B
+2025-07-16 16:21:38,061 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:21:45,044 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 4
+2025-07-16 16:21:45,045 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['d', 'd']
+2025-07-16 16:21:45,045 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:21:45,064 - INFO - Soru 1 gösterildi: 'En küçük asal sayý kaçtýr?'. Seçenekler: [A: 0, B: 1, C: 2, D: 3]. Doðru Cevap: C
+2025-07-16 16:21:47,069 - INFO - Soru 1 doðru cevaplandý. Seçilen Þýk: C (2). Doðru Cevap: C (2).
+2025-07-16 16:21:47,071 - INFO - Soru 2 gösterildi: 'Halk arasýnda 'göz deðmesini önlemek' amacýyla yaygýn olarak kullanýlan bir nesnedir?'. Seçenekler: [A: Çan, B: Nazar boncuðu, C: Tespih, D: Anahtar]. Doðru Cevap: B
+2025-07-16 16:21:48,922 - INFO - Soru 2 doðru cevaplandý. Seçilen Þýk: B (Nazar boncuðu). Doðru Cevap: B (Nazar boncuðu).
+2025-07-16 16:21:48,923 - INFO - Baraj sorusu 2 baþarýyla geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:21:48,925 - INFO - Soru 3 gösterildi: 'En uzun nehir hangisidir?'. Seçenekler: [A: Nil, B: Amazon, C: Yangtze, D: Mississippi]. Doðru Cevap: A
+2025-07-16 16:21:50,240 - INFO - Soru 3 doðru cevaplandý. Seçilen Þýk: A (Nil). Doðru Cevap: A (Nil).
+2025-07-16 16:21:50,242 - INFO - Soru 4 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'. Seçenekler: [A: Kedi Pastasý, B: Trileçe, C: Cheescake, D: Tiramisu]. Doðru Cevap: D
+2025-07-16 16:21:52,039 - INFO - Soru 4 doðru cevaplandý. Seçilen Þýk: D (Tiramisu). Doðru Cevap: D (Tiramisu).
+2025-07-16 16:21:52,041 - INFO - Soru 5 gösterildi: 'Iþýk hýzý saniyede kaç kilometredir?'. Seçenekler: [A: 300,000 km/s, B: 150,000 km/s, C: 1,000,000 km/s, D: 500,000 km/s]. Doðru Cevap: A
+2025-07-16 16:21:53,577 - INFO - Soru 5 doðru cevaplandý. Seçilen Þýk: A (300,000 km/s). Doðru Cevap: A (300,000 km/s).
+2025-07-16 16:21:53,579 - INFO - Soru 6 gösterildi: 'Divan-ý Lügatit Türk adlý eserin yazarý kimdir?'. Seçenekler: [A: Kaþgarlý Mahmut, B: Yusuf Has Hacip, C: Ali Þir Nevai, D: Ahmet Yesevi]. Doðru Cevap: A
+2025-07-16 16:21:57,639 - INFO - Soru 6 doðru cevaplandý. Seçilen Þýk: A (Kaþgarlý Mahmut). Doðru Cevap: A (Kaþgarlý Mahmut).
+2025-07-16 16:21:57,641 - INFO - Soru 7 gösterildi: 'Kuzey Iþýklarý olarak bilinen doða olayý hangi gezegenin manyetik alanýyla ilgilidir?'. Seçenekler: [A: Mars, B: Merkür, C: Dünya, D: Uranüs]. Doðru Cevap: C
+2025-07-16 16:21:58,671 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:00,452 - INFO - Soru 7 doðru cevaplandý. Seçilen Þýk: C (Dünya). Doðru Cevap: C (Dünya).
+2025-07-16 16:22:00,453 - INFO - Baraj sorusu 7 baþarýyla geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 16:22:00,455 - INFO - Soru 8 gösterildi: 'Penisilini kim keþfetti?'. Seçenekler: [A: Humphry Davy, B: Robert Boyle, C: Marie Curie, D: Alexander Fleming]. Doðru Cevap: D
+2025-07-16 16:22:00,993 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:03,878 - INFO - Soru 8 doðru cevaplandý. Seçilen Þýk: D (Alexander Fleming). Doðru Cevap: D (Alexander Fleming).
+2025-07-16 16:22:03,880 - INFO - Soru 9 gösterildi: 'Thor hangi Tanrý'nýn oðluydu?'. Seçenekler: [A: Odin, B: Loki, C: Zeus, D: Hades]. Doðru Cevap: A
+2025-07-16 16:22:06,260 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:31,791 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:22:37,518 - INFO - Yeni oyun baþlatýldý. Oyuncu: a a, Yaþ: 4
+2025-07-16 16:22:37,519 - INFO - SecondWindow oyuncu bilgileri güncellendi: a a, Jokerler: ['rf', 'f', 'f']
+2025-07-16 16:22:37,519 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:22:37,536 - INFO - Soru 1 gösterildi: 'Türkiye kaç coðrafi bölgeden oluþur?'. Seçenekler: [A: 6, B: 7, C: 8, D: 5]. Doðru Cevap: B
+2025-07-16 16:22:39,325 - INFO - Soru 1 doðru cevaplandý. Seçilen Þýk: B (7). Doðru Cevap: B (7).
+2025-07-16 16:22:39,327 - INFO - Soru 2 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'. Seçenekler: [A: 8, B: 9, C: 10, D: 11]. Doðru Cevap: D
+2025-07-16 16:22:41,194 - INFO - Soru 2 doðru cevaplandý. Seçilen Þýk: D (11). Doðru Cevap: D (11).
+2025-07-16 16:22:41,194 - INFO - Baraj sorusu 2 baþarýyla geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:22:41,196 - INFO - Soru 3 gösterildi: 'DNA'nýn açýlýmý nedir?'. Seçenekler: [A: Deoksiribonükleik Asit, B: Dijital Nükleer Asit, C: Dinamik Nöroaktif Asit, D: Diyot Nöron Aktarýcý]. Doðru Cevap: A
+2025-07-16 16:22:42,794 - INFO - Soru 3 doðru cevaplandý. Seçilen Þýk: A (Deoksiribonükleik Asit). Doðru Cevap: A (Deoksiribonükleik Asit).
+2025-07-16 16:22:42,796 - INFO - Soru 4 gösterildi: 'Kahveye batýrýlmýþ kedi dili bisküvileri ve mascarpone peyniri ile yapýlan Ýtalyan tatlýsýnýn adý nedir?'. Seçenekler: [A: Kedi Pastasý, B: Trileçe, C: Cheescake, D: Tiramisu]. Doðru Cevap: D
+2025-07-16 16:22:44,692 - INFO - Soru 4 doðru cevaplandý. Seçilen Þýk: D (Tiramisu). Doðru Cevap: D (Tiramisu).
+2025-07-16 16:22:44,694 - INFO - Soru 5 gösterildi: 'Android uygulamalarý geliþtirmek için hangi programlama dili sýklýkla kullanýlýr?'. Seçenekler: [A: Java, B: Python, C: C++, D: C#]. Doðru Cevap: A
+2025-07-16 16:22:46,851 - INFO - Soru 5 doðru cevaplandý. Seçilen Þýk: A (Java). Doðru Cevap: A (Java).
+2025-07-16 16:22:46,853 - INFO - Soru 6 gösterildi: 'Divan-ý Lügatit Türk adlý eserin yazarý kimdir?'. Seçenekler: [A: Kaþgarlý Mahmut, B: Yusuf Has Hacip, C: Ali Þir Nevai, D: Ahmet Yesevi]. Doðru Cevap: A
+2025-07-16 16:22:48,412 - INFO - Soru 6 doðru cevaplandý. Seçilen Þýk: A (Kaþgarlý Mahmut). Doðru Cevap: A (Kaþgarlý Mahmut).
+2025-07-16 16:22:48,414 - INFO - Soru 7 gösterildi: 'Hangisi Türkiye'de UNESCO Dünya Mirasý Listesi'nde yer alan bir antik kenttir?'. Seçenekler: [A: Çatalhöyük, B: Ani Harabeleri, C: Göbekli Tepe, D: Hepsi]. Doðru Cevap: D
+2025-07-16 16:22:48,416 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:50,691 - INFO - Soru 7 doðru cevaplandý. Seçilen Þýk: D (Hepsi). Doðru Cevap: D (Hepsi).
+2025-07-16 16:22:50,692 - INFO - Baraj sorusu 7 baþarýyla geçildi. Yeni güvenli ödül: 30.000 TL.
+2025-07-16 16:22:50,694 - INFO - Soru 8 gösterildi: 'Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?'. Seçenekler: [A: Mekanik, B: Termodinamik, C: Kuantum Fiziði, D: Optik]. Doðru Cevap: C
+2025-07-16 16:22:50,696 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:55,568 - INFO - Soru 8 doðru cevaplandý. Seçilen Þýk: C (Kuantum Fiziði). Doðru Cevap: C (Kuantum Fiziði).
+2025-07-16 16:22:55,570 - INFO - Soru 9 gösterildi: 'Thor hangi Tanrý'nýn oðluydu?'. Seçenekler: [A: Odin, B: Loki, C: Zeus, D: Hades]. Doðru Cevap: A
+2025-07-16 16:22:55,572 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:22:58,049 - INFO - Soru 9 doðru cevaplandý. Seçilen Þýk: A (Odin). Doðru Cevap: A (Odin).
+2025-07-16 16:22:58,051 - INFO - Soru 10 gösterildi: 'Genellikle 'Pop'un Kralý' olarak anýlan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanýlan sanatçý kimdir?'. Seçenekler: [A: Justin Bieber, B: Micheal Jackson, C: George Micheal, D: The Weekend]. Doðru Cevap: B
+2025-07-16 16:22:58,054 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:23:00,547 - INFO - Soru 10 doðru cevaplandý. Seçilen Þýk: B (Micheal Jackson). Doðru Cevap: B (Micheal Jackson).
+2025-07-16 16:23:00,549 - INFO - Soru 11 gösterildi: 'Cumhurbaþkanlýðý forsu ve armasýndaki 16 Türk devleti arasýnda hangisi yoktur?'. Seçenekler: [A: Batý Hun Ýmparatorluðu, B: Harzemþahlar, C: Avar Ýmparatorluðu, D: Anadolu Selçuklu Devleti]. Doðru Cevap: D
+2025-07-16 16:23:00,551 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:23:04,387 - INFO - 50/50 joker hakký soru 11 için kullanýldý. Kaldýrýlan þýklar: C: Avar Ýmparatorluðu, A: Batý Hun Ýmparatorluðu
+2025-07-16 16:23:08,285 - INFO - Soru 11 doðru cevaplandý. Seçilen Þýk: D (Anadolu Selçuklu Devleti). Doðru Cevap: D (Anadolu Selçuklu Devleti).
+2025-07-16 16:23:08,287 - INFO - Soru 12 gösterildi: 'Kur'an-ý Kerim'de hangisi üzerine yemin edilmemiþtir?'. Seçenekler: [A: Deniz, B: Güneþ, C: Arý, D: Kalem]. Doðru Cevap: C
+2025-07-16 16:23:08,289 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:23:10,701 - INFO - Soru 12 doðru cevaplandý. Seçilen Þýk: C (Arý). Doðru Cevap: C (Arý).
+2025-07-16 16:23:10,701 - INFO - Baraj sorusu 12 baþarýyla geçildi. Yeni güvenli ödül: 1.000.000 TL.
+2025-07-16 16:23:10,701 - INFO - Oyun kazanýldý! Kazanýlan miktar: 1.000.000 TL.
+2025-07-16 16:23:10,715 - INFO - Skor veritabanýna kaydedildi: a a, Kazanç: 1.000.000 TL.
+2025-07-16 16:23:10,720 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 16:23:10,722 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 16:43:54,547 - INFO - Uygulama baþlatýlýyor.
+2025-07-16 16:44:19,238 - INFO - Yeni oyun baþlatýldý. Oyuncu: beyza nur özdemir, Yaþ: 21
+2025-07-16 16:44:19,239 - INFO - SecondWindow oyuncu bilgileri güncellendi: beyza nur özdemir, Jokerler: ['esma', 'zeynep', 'eslem']
+2025-07-16 16:44:19,240 - INFO - Pencere deðiþimi: FirstWindow -> SecondWindow
+2025-07-16 16:44:19,264 - INFO - Soru 1 gösterildi: 'Her takýmýn her maçýn baþlangýcýnda sahada kaç futbolcusu olmalýdýr?'. Seçenekler: [A: 8, B: 9, C: 10, D: 11]. Doðru Cevap: D
+2025-07-16 16:44:26,232 - INFO - Soru 1 doðru cevaplandý. Seçilen Þýk: D (11). Doðru Cevap: D (11).
+2025-07-16 16:44:26,234 - INFO - Soru 2 gösterildi: 'Halk arasýnda kullanýlan ifadeye göre çok fikir deðiþtiren insanlarýn hangisi gibi renkten renge girdiði söylenir?'. Seçenekler: [A: Þempanze gibi, B: Bukalemun gibi, C: Bizon gibi, D: Komodo ejderi gibi]. Doðru Cevap: B
+2025-07-16 16:44:28,487 - INFO - Soru 2 doðru cevaplandý. Seçilen Þýk: B (Bukalemun gibi). Doðru Cevap: B (Bukalemun gibi).
+2025-07-16 16:44:28,487 - INFO - Baraj sorusu 2 geçildi. Yeni güvenli ödül: 2.000 TL.
+2025-07-16 16:44:28,489 - INFO - Soru 3 gösterildi: 'DNA'nýn açýlýmý nedir?'. Seçenekler: [A: Deoksiribonükleik Asit, B: Dijital Nükleer Asit, C: Dinamik Nöroaktif Asit, D: Diyot Nöron Aktarýcý]. Doðru Cevap: A
+2025-07-16 16:44:30,419 - INFO - Soru 3 doðru cevaplandý. Seçilen Þýk: A (Deoksiribonükleik Asit). Doðru Cevap: A (Deoksiribonükleik Asit).
+2025-07-16 16:44:30,421 - INFO - Soru 4 gösterildi: 'Dünyanýn en büyük okyanusu hangisidir?'. Seçenekler: [A: Atlantik, B: Hint, C: Pasifik, D: Arktik]. Doðru Cevap: C
+2025-07-16 16:44:32,282 - INFO - Soru 4 doðru cevaplandý. Seçilen Þýk: C (Pasifik). Doðru Cevap: C (Pasifik).
+2025-07-16 16:44:32,284 - INFO - Soru 5 gösterildi: 'Ýnternetin mucidi kimdir?'. Seçenekler: [A: Tim Berners-Lee, B: Bill Gates, C: Steve Jobs, D: Alan Turing]. Doðru Cevap: A
+2025-07-16 16:44:34,025 - INFO - 50/50 joker hakký soru 5 için kullanýldý. Kaldýrýlan þýklar: D: Alan Turing, C: Steve Jobs
+2025-07-16 16:44:35,404 - INFO - Soru 5 doðru cevaplandý. Seçilen Þýk: A (Tim Berners-Lee). Doðru Cevap: A (Tim Berners-Lee).
+2025-07-16 16:44:35,406 - INFO - Soru 6 gösterildi: 'Yunan mitolojisinde tanrýlarýn kralý kimdir?'. Seçenekler: [A: Eros, B: Zeus, C: Ýlyada, D: Herkül]. Doðru Cevap: B
+2025-07-16 16:44:38,020 - INFO - Seyirciye sorma jokeri soru 6 için kullanýldý. Yüzdeler: [A: 18%, B: 33%, C: 25%, D: 24%].
+2025-07-16 16:44:39,290 - INFO - Soru 6 doðru cevaplandý. Seçilen Þýk: B (Zeus). Doðru Cevap: B (Zeus).
+2025-07-16 16:44:39,292 - INFO - Soru 7 gösterildi: 'Kuzey Iþýklarý olarak bilinen doða olayý hangi gezegenin manyetik alanýyla ilgilidir?'. Seçenekler: [A: Mars, B: Merkür, C: Dünya, D: Uranüs]. Doðru Cevap: C
+2025-07-16 16:44:39,294 - INFO - Süre sýnýrý 7. sorudan itibaren kaldýrýldý.
+2025-07-16 16:44:46,207 - WARNING - Soru 7 yanlýþ cevaplandý. Seçilen Þýk: B (Merkür). Doðru Cevap: C (Dünya). Oyun sona erdi.
+2025-07-16 16:44:46,207 - INFO - Oyun kaybedildi. Kazanýlan miktar: 2.000 TL.
+2025-07-16 16:44:46,223 - INFO - Skor veritabanýna kaydedildi: beyza nur özdemir, Kazanç: 2.000 TL.
+2025-07-16 16:44:46,228 - INFO - Oyun durumu sýfýrlandý.
+2025-07-16 16:44:46,230 - INFO - Pencere deðiþimi: SecondWindow -> ThirdWindow
+2025-07-16 16:44:50,490 - INFO - Oyuncu 'Oyundan Çýk' butonuna týkladý. Uygulama kapatýlýyor.
