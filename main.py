@@ -26,6 +26,7 @@ class FirstWindow(QWidget):
     def __init__(self, stacked_widget):
         super().__init__()
         self.stacked_widget = stacked_widget
+        self.joker_persons = []
         self.media_player = QMediaPlayer()
         self.music_file = "first_music.mp3"
         if QUrl.fromLocalFile(self.music_file).isValid():
@@ -35,8 +36,26 @@ class FirstWindow(QWidget):
             logger.warning(f"Müzik dosyası bulunamadı: {self.music_file}") 
         self.media_player.setVolume(50)
         self.init_ui()
-        self.create_db()
+        self.init_db()
         self.load_scores()
+
+    def init_db(self):
+        try:
+            self.conn = sqlite3.connect('milyoner_oyunu.db')
+            self.cursor = self.conn.cursor()
+            self.cursor.execute("""
+                CREATE TABLE IF NOT EXISTS skorlar (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    ad TEXT,
+                    soyad TEXT,
+                    kazanc TEXT
+                )
+            """)
+            self.conn.commit()
+            logger.info("Veritabanı bağlantısı kuruldu ve skorlar tablosu kontrol edildi.")
+        except sqlite3.Error as e:
+            logger.error(f"Veritabanı hatası: {e}")
+            QMessageBox.critical(self, "Veritabanı Hatası", f"Veritabanına bağlanılamadı veya tablo oluşturulamadı: {e}")
 
     def init_ui(self):
         self.background_label = QLabel(self)
@@ -154,19 +173,19 @@ class FirstWindow(QWidget):
         user_widget.setLayout(vbox_user)
 
         #skor geçmişi tablo hali
-        self.score_table = QTableWidget()
-        self.score_table.setColumnCount(4)
-        self.score_table.setHorizontalHeaderLabels(["ID", "Ad", "Soyad", "Kazanç"])
-        self.score_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.score_table.horizontalHeader().setStretchLastSection(True)
-        self.score_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.scores_table = QTableWidget()
+        self.scores_table.setColumnCount(4)
+        self.scores_table.setHorizontalHeaderLabels(["ID", "Ad", "Soyad", "Kazanç"])
+        self.scores_table.setEditTriggers(QTableWidget.NoEditTriggers)
+        self.scores_table.horizontalHeader().setStretchLastSection(True)
+        self.scores_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         score_layout = QVBoxLayout()
         score_title = QLabel("Skor Geçmişi")
         score_title.setFont(QFont("Arial", 20, QFont.Bold))
         score_title.setAlignment(Qt.AlignCenter)
         score_layout.addWidget(score_title)
-        score_layout.addWidget(self.score_table)
+        score_layout.addWidget(self.scores_table)
 
         score_widget = QWidget()
         score_widget.setLayout(score_layout)
@@ -223,30 +242,15 @@ class FirstWindow(QWidget):
         self.sound_button.move(10, self.height() - self.sound_button.height() - 10)
         event.accept()
 
-    #skor geçmişi için veritabanı
-    def create_db(self):
-        self.conn = sqlite3.connect("scores.db")
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            CREATE TABLE IF NOT EXISTS skorlar (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ad TEXT,
-                soyad TEXT,
-                kazanc TEXT
-            )
-        """)
-        self.conn.commit()
-
-    #skorları tabloya geçirme
     def load_scores(self):
         self.cursor.execute("SELECT * FROM skorlar ORDER BY id DESC")
         records = self.cursor.fetchall()
-        self.score_table.setRowCount(len(records))
+        self.scores_table.setRowCount(len(records))
         for i, row in enumerate(records):
             for j, value in enumerate(row):
                 item = QTableWidgetItem(str(value))
                 item.setTextAlignment(Qt.AlignCenter)
-                self.score_table.setItem(i, j, item)
+                self.scores_table.setItem(i, j, item)
 
     #oyuna başlama/eksik alanlar varsa uyarı mesajları
     def start_game(self):
@@ -294,7 +298,7 @@ class FirstWindow(QWidget):
 
         if pixmap.isNull():
             print("Uyarı: Ses ikonu dosyası bulunamadı. Varsayılan gri kare kullanılacak.")
-            logger.warning("Ses ikonu dosyası bulunamadı. Varsayılan kullanılacak.") # Loglama eklendi
+            logger.warning("Ses ikonu dosyası bulunamadı. Varsayılan kullanılacak.")
             pixmap = QPixmap(50, 50)
             pixmap.fill(Qt.gray)
         else:
@@ -359,70 +363,249 @@ class SecondWindow(QWidget):
         ]
         self.baraj_sorulari = [1, 6, 11]  #2, 7, 12.sorular
 
-        #Sorular
-        self.seviye1_sorular = [
-            {"soru": "Halk arasında kullanılan ifadeye göre çok fikir değiştiren insanların hangisi gibi renkten renge girdiği söylenir?", "secenekler": ["Şempanze gibi", "Bukalemun gibi", "Bizon gibi", "Komodo ejderi gibi"], "dogru": "B"},
-            {"soru": "Her takımın her maçın başlangıcında sahada kaç futbolcusu olmalıdır?", "secenekler": ["8", "9", "10", "11"], "dogru": "D"},
-            {"soru": "Güneş'e en yakın gezegen hangisidir?", "secenekler": ["Venüs", "Merkür", "Mars", "Dünya"], "dogru": "B"},
-            {"soru": "Türkiye kaç coğrafi bölgeden oluşur?", "secenekler": ["6", "7", "8", "5"], "dogru": "B"},
-            {"soru": "En küçük asal sayı kaçtır?", "secenekler": ["0", "1", "2", "3"], "dogru": "C"},
-            {"soru": "Elektrik akımının birimi nedir?", "secenekler": ["Volt", "Amper", "Watt", "Ohm"], "dogru": "B"},
-            {"soru": "Halk arasında 'göz değmesini önlemek' amacıyla yaygın olarak kullanılan bir nesnedir?", "secenekler": ["Çan", "Nazar boncuğu", "Tespih", "Anahtar"], "dogru": "B"},
-            {"soru": "Hangi organın dört odası vardır?", "secenekler": ["Kalp", "Mide", "Akciğer", "Karaciğer"], "dogru": "A"},
-        ] 
+        # Müzik ve ses efektleri
+        self.media_player = QMediaPlayer()
+        self.music_file = "game_music.mp3"
+        if QUrl.fromLocalFile(self.music_file).isValid():
+            self.media_player.setMedia(QMediaContent(QUrl.fromLocalFile(self.music_file)))
+        else:
+            print(f"Uyarı: '{self.music_file}' müzik dosyası bulunamadı.")
+            logger.warning(f"Müzik dosyası bulunamadı: {self.music_file}")
+        self.media_player.setVolume(50)
 
-        self.seviye2_sorular = [
-            {"soru": "DNA'nın açılımı nedir?", "secenekler": ["Deoksiribonükleik Asit", "Dijital Nükleer Asit", "Dinamik Nöroaktif Asit", "Diyot Nöron Aktarıcı"], "dogru": "A"},
-            {"soru": "Kahveye batırılmış kedi dili bisküvileri ve mascarpone peyniri ile yapılan İtalyan tatlısının adı nedir?", "secenekler": ["Kedi Pastası", "Trileçe", "Cheescake", "Tiramisu"], "dogru": "D"},
-            {"soru": "Dünyanın en büyük okyanusu hangisidir?", "secenekler": ["Atlantik", "Hint", "Pasifik", "Arktik"], "dogru": "C"},
-            {"soru": "Fatih Sultan Mehmet’in babası kimdir?", "secenekler": ["I.Mehmet", "II.Murad", "II.Mehmet", "Yıldırım Beyazıt"], "dogru": "B"},
-            {"soru": "En uzun nehir hangisidir?", "secenekler": ["Nil", "Amazon", "Yangtze", "Mississippi"], "dogru": "A"},
-            {"soru": "İlk çağda yazıyı bulan medeniyet hangisidir?", "secenekler": ["Sümerler", "Hititler", "Urartular", "Asurlar"], "dogru": "A"},
-        ]
+        self.correct_sound_player = QMediaPlayer()
+        correct_sound_file = "correct_answer.mp3"
+        if QUrl.fromLocalFile(correct_sound_file).isValid():
+            self.correct_sound_player.setMedia(QMediaContent(QUrl.fromLocalFile(correct_sound_file)))
+        else:
+            print(f"Uyarı: '{correct_sound_file}' ses dosyası bulunamadı.")
+            logger.warning(f"Ses dosyası bulunamadı: {correct_sound_file}")
+        self.correct_sound_player.setVolume(80)
 
-        self.seviye3_sorular = [
-            {"soru": "İnternetin mucidi kimdir?", "secenekler": ["Tim Berners-Lee", "Bill Gates", "Steve Jobs", "Alan Turing"], "dogru": "A"},
-            {"soru": "Divan-ı Lügatit Türk adlı eserin yazarı kimdir?", "secenekler": ["Kaşgarlı Mahmut", "Yusuf Has Hacip", "Ali Şir Nevai", "Ahmet Yesevi"], "dogru": "A"},
-            {"soru": "Türkiye'nin en uzun nehri hangisidir?", "secenekler": ["Kızılırmak", "Fırat", "Dicle", "Yeşilırmak"], "dogru": "A"},
-            {"soru": "Yunan mitolojisinde tanrıların kralı kimdir?", "secenekler": ["Eros", "Zeus", "İlyada", "Herkül"], "dogru": "B"},
-            {"soru": "Porsche logosunda hangi hayvan görülebilir?", "secenekler": ["Aslan", "Kaplan", "Boğa", "At"], "dogru": "D"},
-            {"soru": "Android uygulamaları geliştirmek için hangi programlama dili sıklıkla kullanılır?", "secenekler": ["Java", "Python", "C++", "C#"], "dogru": "A"},
-            {"soru": "Işık hızı saniyede kaç kilometredir?", "secenekler": ["300,000 km/s", "150,000 km/s", "1,000,000 km/s", "500,000 km/s"], "dogru": "A"},
-        ]
+        self.incorrect_sound_player = QMediaPlayer()
+        incorrect_sound_file = "incorrect_answer.mp3"
+        if QUrl.fromLocalFile(incorrect_sound_file).isValid():
+            self.incorrect_sound_player.setMedia(QMediaContent(QUrl.fromLocalFile(incorrect_sound_file)))
+        else:
+            print(f"Uyarı: '{incorrect_sound_file}' ses dosyası bulunamadı.")
+            logger.warning(f"Ses dosyası bulunamadı: {incorrect_sound_file}")
+        self.incorrect_sound_player.setVolume(80)
 
+        # Veritabanı bağlantısı
+        self.conn = sqlite3.connect('milyoner_oyunu.db')
+        self.cursor = self.conn.cursor()
+        self.create_questions_table()
+        self.insert_initial_questions() #sadece ilk çalıştırmada ya da boşsa ekler
+        self.load_questions_from_db() 
+        self.levele_gore_soru_secimi()
 
-        self.seviye4_sorular = [
-            {"soru": "Penisilini kim keşfetti?", "secenekler": ["Humphry Davy", "Robert Boyle", "Marie Curie", "Alexander Fleming"], "dogru": "D"},
-            {"soru": "Hangisi Türkiye'de UNESCO Dünya Mirası Listesi'nde yer alan bir antik kenttir?", "secenekler": ["Çatalhöyük", "Ani Harabeleri", "Göbekli Tepe", "Hepsi"], "dogru": "D"},
-            {"soru": "Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?", "secenekler": ["Mekanik", "Termodinamik", "Kuantum Fiziği", "Optik"], "dogru": "C"},
-            {"soru": "Dünyanın en derin noktası neresidir?", "secenekler": ["Mariana Çukuru", "Tonga Çukuru", "Java Çukuru", "Puerto Rico Çukuru"], "dogru": "A"},
-            {"soru": "Kuzey Işıkları olarak bilinen doğa olayı hangi gezegenin manyetik alanıyla ilgilidir?", "secenekler": ["Mars", "Merkür", "Dünya", "Uranüs"], "dogru": "C"},
-            {"soru": "Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanılır?", "secenekler": ["Sabırsızlık", "Direnç", "Hız", "Uyum"], "dogru": "B"},
-        ]
-
-        self.seviye5_sorular = [
-            {"soru": "Marvel sinematik evreninde 'Kaptan Amerika' karakterini canlandıran oyuncu kimdir?", "secenekler": ["Chris Pratt", "Chris Hemsworth", "Chris Evans", "Robert Downey Jr."], "dogru": "C"},
-            {"soru": "Genellikle 'Pop'un Kralı' olarak anılan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanılan sanatçı kimdir?", "secenekler": ["Justin Bieber", "Micheal Jackson", "George Micheal", "The Weekend"], "dogru": "B"},
-            {"soru": "Hangi popüler TV dizisinde Targaryen ve Stark hanedanı yer aldı?", "secenekler": ["Game of Thrones", "House of the Dragon", "The Walking Dead", "Supernatural"], "dogru": "A"},
-            {"soru": "Thor hangi Tanrı'nın oğluydu?", "secenekler": ["Odin", "Loki", "Zeus", "Hades"], "dogru": "A"},
-            {"soru": "Müzeyyen Senar hangi dönemde ün kazanmıştır?", "secenekler": ["1920'ler", "1940'lar", "1960'lar", "1980'ler"], "dogru": "B"},
-            {"soru": "İlk Türk kadın romancı kimdir?", "secenekler": ["Halide Edip Adıvar", "Fatma Aliye Topuz", "Nezihe Muhiddin", "Afife Jale"], "dogru": "B"},
-        ]
-
-
-        self.seviye6_sorular = [
-            {"soru": "On kıtadan oluşan İstiklal Marşı'nın tamamında, bu kelimelerden hangisi diğerlerinden daha az geçer?", "secenekler": ["Vatan", "Kan", "Toprak", "Yurt"], "dogru": "C"},
-            {"soru": "Hangisi “Dede Korkut Hikayeleri”’ndeki karakterlerden biri değildir?", "secenekler": ["Bala Hatun", "Banu Çiçek", "Bamsı Beyrek", "Bayındır Han"], "dogru": "A"},
-            {"soru": "Kur'an-ı Kerim'de hangisi üzerine yemin edilmemiştir?", "secenekler": ["Deniz", "Güneş", "Arı", "Kalem"], "dogru": "C"},
-            {"soru": "Cumhurbaşkanlığı forsu ve armasındaki 16 Türk devleti arasında hangisi yoktur?", "secenekler": ["Batı Hun İmparatorluğu", "Harzemşahlar", "Avar İmparatorluğu", "Anadolu Selçuklu Devleti"], "dogru": "D"},
-            {"soru": "Herodot'un deneyinde, konuşmayan çocuğun söylediği ilk kelime nedir?", "secenekler": ["Ver", "Anne", "Ekmek", "Su"], "dogru": "C"},
-            {"soru": "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "secenekler": ["Pac-Man", "Tabu", "Monopoly", "Mlyoner"], "dogru": "C"},
-            {"soru": "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "secenekler": ["İnsan", "Fare", "Fil", "Karınca"], "dogru": "D"},
-            {"soru": "Giza'da kaç tane piramit yapılmıştır?", "secenekler": ["2", "3", "4", "5"], "dogru": "B"},
-        ]
-
-        self.sorular = []  
         self.init_ui()
+
+    def create_questions_table(self):
+        try:
+            self.cursor.execute("""
+                CREATE TABLE IF NOT EXISTS questions (
+                    soru_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    seviye INTEGER NOT NULL,
+                    soru_metni TEXT NOT NULL,
+                    secenek_a TEXT NOT NULL,
+                    secenek_b TEXT NOT NULL,
+                    secenek_c TEXT NOT NULL,
+                    secenek_d TEXT NOT NULL,
+                    dogru_cevap TEXT NOT NULL
+                )
+            """)
+            self.conn.commit()
+            logger.info("Sorular tablosu kontrol edildi/oluşturuldu.")
+        except sqlite3.Error as e:
+            logger.error(f"Sorular tablosu oluşturulurken hata oluştu: {e}")
+            QMessageBox.critical(self, "Veritabanı Hatası", f"Sorular tablosu oluşturulamadı: {e}")
+
+    def insert_initial_questions(self):
+        try:
+            self.cursor.execute("SELECT COUNT(*) FROM questions")
+            if self.cursor.fetchone()[0] == 0:
+                questions_to_insert = [
+                    # Seviye 1 
+                    (1, "Halk arasında bilinen bir bilgiye göre, hangi hayvan süt verir?", "Horoz", "Kedi", "Tavuk", "Ördek", "B"),
+                    (1, "Halk arasında bilinen bir bilgiye göre, kırmızı ışıkta ne yapılır?", "Durulur", "Geçilir", "Zıplanır", "Koşulur", "A"),
+                    (1, "Halk arasında bilinen bir bilgiye göre, yazın insanlar genelde ne yer?", "Kestane", "Dondurma", "Lahana", "Balık", "B"),
+                    (1, "Halk arasında bilinen bir bilgiye göre, düğünde ne takılır?", "Bardak", "Havlu", "Altın", "Kitap", "C"),
+                    (1, "Halk arasında bilinen bir bilgiye göre, kahvaltıda ne yenir?", "Karpuz", "Pasta", "Makarna", "Peynir", "D"),
+                    (1, "Halk arasında bilinen bir bilgiye göre, nazardan korunmak için ne takılır?", "Ayakkabı", "Gözlük", "Nazar boncuğu", "Kravat", "C"),
+                    (1, "Hangi hayvan uçamaz?", "Serçe", "Kartal", "Tavuk", "Güvercin", "C"),
+                    (1, "Güneş hangi yönden doğar?", "Kuzey", "Güney", "Doğu", "Batı", "C"),
+                    (1, "Bir yıl kaç aydır?", "10", "11", "12", "13", "C"),
+                    (1, "Hangisi bir meyvedir?", "Patates", "Elma", "Havuç", "Soğan", "B"),
+                    (1, "Bir tavşan ne ile beslenir?", "Et", "Otu", "Balık", "Meyve", "B"),
+                    (1, "En küçük tek haneli sayı hangisidir?", "0", "1", "2", "3", "B"),
+                    (1, "Güneşin en parlak olduğu zaman dilimi hangisidir?", "Sabah", "Öğle", "Akşam", "Gece", "B"),
+                    (1, "Suda yaşayan hayvan hangisidir?", "Kedi", "Köpek", "Kertenkele", "Balık", "D"),
+                    (1, "Bir yılda kaç mevsim vardır?", "2", "3", "4", "5", "C"),
+                    (1, "Hangi meyve turuncu renklidir?", "Elma", "Muz", "Portakal", "Üzüm", "C"),
+                    (1, "Saatte kaç dakika vardır?", "30", "60", "90", "120", "B"),
+                    (1, "Hangi hayvan havlayarak iletişim kurar?", "Kedi", "Köpek", "Kuş", "At", "B"),
+                    (1, "Gözlük ne amaçla kullanılır?", "Görmek", "Yüzmek", "Uçmak", "Yemek", "A"),
+                    (1, "Deniz nerede bulunur?", "Dağlarda", "Şehirde", "Ormanda", "Okyanusta", "D"),
+                    #Seviye 2
+                    (2, "Nobel Ödülleri hangi alanda verilmez?", "Fizik", "Kimya", "Matematik", "Edebiyat", "C"),
+                    (2, "Hangi okyanus dünyanın en büyüğüdür?", "Atlantik Okyanusu", "Hint Okyanusu", "Arktik Okyanusu", "Pasifik Okyanusu", "D"),
+                    (2, "En uzun kış mevsimi hangi yarımkürede yaşanır?", "Kuzey Yarımküre", "Güney Yarımküre", "Her ikisi", "Hiçbiri", "A"),
+                    (2, "Türkiye'nin en büyük gölü hangisidir?", "Tuz Gölü", "Van Gölü", "Beyşehir Gölü", "Eğirdir Gölü", "B"),
+                    (2, "Bir otomobil hangi yakıtla çalışmaz?", "Benzin", "Dizel", "Elektrik", "Su", "D"),
+                    (2, "Dünya'nın uydusu hangisidir?", "Mars", "Venüs", "Ay", "Jüpiter", "C"),
+                    (2, "Bir yıl kaç haftadan oluşur?", "52", "48", "50", "45", "A"),
+                    (2, "Hangi renk gökyüzünün rengidir?", "Kırmızı", "Mavi", "Sarı", "Yeşil", "B"),
+                    (2, "İlk insan hangi kıtada yaşamıştır?", "Avrupa", "Asya", "Afrika", "Amerika", "C"),
+                    (2, "Hangisi sebze değildir?", "Domates", "Patates", "Elma", "Havuç", "C"),
+                    (2, "Güneş sistemi kaç gezegenden oluşur?", "7", "8", "9", "10", "B"),
+                    (2, "Türkiye hangi kıtalar arasında yer alır?", "Avrupa ve Asya", "Avrupa ve Afrika", "Asya ve Afrika", "Afrika ve Amerika", "A"),
+                    (2, "DNA'nın açılımı nedir?", "Deoksiribonükleik Asit", "Dijital Nükleer Asit", "Dinamik Nöroaktif Asit", "Diyot Nöron Aktarıcı", "A"),
+                    (2, "Kahveye batırılmış kedi dili bisküvileri ve mascarpone peyniri ile yapılan İtalyan tatlısının adı nedir?", "Kedi Pastası", "Trileçe", "Cheescake", "Tiramisu", "D"),
+                    (2, "Dünyanın en büyük okyanusu hangisidir?", "Atlantik", "Hint", "Pasifik", "Arktik", "C"),
+                    (2, "Fatih Sultan Mehmet’in babası kimdir?", "I.Mehmet", "II.Murad", "II.Mehmet", "Yıldırım Beyazıt", "B"),
+                    (2, "En uzun nehir hangisidir?", "Nil", "Amazon", "Yangtze", "Mississippi", "A"),
+                    (2, "İlk çağda yazıyı bulan medeniyet hangisidir?", "Sümerler", "Hititler", "Urartular", "Asurlar", "A"),
+                    (2, "Nobel Ödülleri hangi alanda verilmez?", "Fizik", "Kimya", "Matematik", "Edebiyat", "C"),
+                    (2, "Hangi okyanus dünyanın en büyüğüdür?", "Atlantik Okyanusu", "Hint Okyanusu", "Arktik Okyanusu", "Pasifik Okyanusu", "D"),
+                    (2, "Hangi gezegenin halkaları vardır?", "Venüs", "Mars", "Satürn", "Merkür", "C"),
+                    (2, "Hangi ülke Eiffel Kulesi ile ünlüdür?", "İtalya", "İspanya", "Fransa", "Almanya", "C"),
+                    # Seviye 3
+                    (3, "Kanın pıhtılaşmasında hangi vitamin rol oynar?", "C Vitamini", "D Vitamini", "K Vitamini", "B12 Vitamini", "C"),
+                    (3, "İnternetin mucidi kimdir?", "Tim Berners-Lee", "Bill Gates", "Steve Jobs", "Alan Turing", "A"),
+                    (3, "Divan-ı Lügatit Türk adlı eserin yazarı kimdir?", "Kaşgarlı Mahmut", "Yusuf Has Hacip", "Ali Şir Nevai", "Ahmet Yesevi", "A"),
+                    (3, "Türkiye'nin en uzun nehri hangisidir?", "Kızılırmak", "Fırat", "Dicle", "Yeşilırmak", "A"),
+                    (3, "Yunan mitolojisinde tanrıların kralı kimdir?", "Eros", "Zeus", "İlyada", "Herkül", "B"),
+                    (3, "Porsche logosunda hangi hayvan görülebilir?", "Aslan", "Kaplan", "Boğa", "At", "D"),
+                    (3, "Android uygulamaları geliştirmek için hangi programlama dili sıklıkla kullanılır?", "Java", "Python", "C++", "C#", "A"),
+                    (3, "Işık hızı saniyede kaç kilometredir?", "300,000 km/s", "150,000 km/s", "1,000,000 km/s", "500,000 km/s", "A"),
+                    (3, "Kanın pıhtılaşmasında hangi vitamin rol oynar?", "C Vitamini", "D Vitamini", "K Vitamini", "B12 Vitamini", "C"),
+                    (3, "Leonardo da Vinci'nin ünlü eseri Mona Lisa nerede sergilenmektedir?", "British Museum", "Louvre Müzesi", "Metropolitan Sanat Müzesi", "Uffizi Galerisi", "B"),
+                    (3, "Hangisi elektrik akımını iletmez?", "Bakır", "Alüminyum", "Plastik", "Demir", "C"),
+                    (3, "Leonardo da Vinci'nin ünlü eseri Mona Lisa nerede sergilenmektedir?", "British Museum", "Louvre Müzesi", "Metropolitan Sanat Müzesi", "Uffizi Galerisi", "B"),
+                    (3, "Bir insan vücudundaki en büyük organ hangisidir?", "Kalp", "Beyin", "Deri", "Karaciğer", "C"),
+                    (3, "Türkler hangi yıl İslamiyet’i kabul etmiştir?", "751", "840", "1071", "930", "A"),
+                    (3, "Dünyanın en büyük çölü hangisidir?", "Sahara", "Gobi", "Kalahari", "Antarktika", "D"),
+                    (3, "Hangi element kimyasal sembolü ‘Fe’ ile gösterilir?", "Kurşun", "Demir", "Altın", "Gümüş", "B"),
+                    (3, "Türkiye'nin ilk anayasası hangisidir?", "Kanun-i Esasi", "Medeni Kanun", "Teşkilat-ı Esasiye", "Tanzimat", "A"),
+                    (3, "Bir insanın DNA’sı kaç kromozom içerir?", "23", "46", "92", "44", "B"),
+                    (3, "Klasik müzik bestecisi Mozart hangi ülkedendir?", "Almanya", "Avusturya", "İtalya", "Fransa", "B"),
+                    (3, "Hangi bilim insanı yer çekimi kanununu keşfetmiştir?", "Newton", "Einstein", "Galileo", "Tesla", "A"),
+                    (3, "Bir ışık yılı neyi ifade eder?", "Işığın bir saniyede aldığı yol", "Işığın bir yılda aldığı yol", "Işığın hızını", "Işığın enerjisini", "B"),
+                    (3, "Türkiye'nin en kalabalık şehri hangisidir?", "İzmir", "Ankara", "İstanbul", "Bursa", "C"),
+                    # Seviye 4
+                    (4, "Fotosentez hangi organelde gerçekleşir?", "Mitokondri", "Ribozom", "Kloroplast", "Endoplazmik Retikulum", "C"),
+                    (4, "Hangi dağ dünyanın en yüksek dağıdır?", "K2", "Kangchenjunga", "Everest", "Lhotse", "C"),
+                    (4, "Penisilini kim keşfetti?", "Humphry Davy", "Robert Boyle", "Marie Curie", "Alexander Fleming", "D"),
+                    (4, "Hangisi Türkiye'de UNESCO Dünya Mirası Listesi'nde yer alan bir antik kenttir?", "Çatalhöyük", "Ani Harabeleri", "Göbekli Tepe", "Hepsi", "D"),
+                    (4, "Fizikte 'Schrödinger'in kedisi' deneyi hangi alanla ilgilidir?", "Mekanik", "Termodinamik", "Kuantum Fiziği", "Optik", "C"),
+                    (4, "Dünyanın en derin noktası neresidir?", "Mariana Çukuru", "Tonga Çukuru", "Java Çukuru", "Puerto Rico Çukuru", "A"),
+                    (4, "Kuzey Işıkları olarak bilinen doğa olayı hangi gezegenin manyetik alanıyla ilgilidir?", "Mars", "Merkür", "Dünya", "Uranüs", "C"),
+                    (4, "Türkçedeki 'mukavemet' kelimesi en çok ne anlamda kullanılır?", "Sabırsızlık", "Direnç", "Hız", "Uyum", "B"),
+                    (4, "Fotosentez hangi organelde gerçekleşir?", "Mitokondri", "Ribozom", "Kloroplast", "Endoplazmik Retikulum", "C"),
+                    (4, "Hangi dağ dünyanın en yüksek dağıdır?", "K2", "Kangchenjunga", "Everest", "Lhotse", "C"),
+                    (4, "Albert Einstein hangi kuramıyla ünlüdür?", "Yerçekimi", "Elektromanyetizma", "Görelilik", "Termodinamik", "C"),
+                    (4, "Hangi gezegen gaz devi olarak bilinir?", "Mars", "Venüs", "Jüpiter", "Merkür", "C"),
+                    (4, "Roma İmparatorluğu’nun başkenti neresidir?", "Atina", "Roma", "Kartaca", "İstanbul", "B"),
+                    (4, "Hangisi dünya dinlerinden biri değildir?", "Budizm", "Şamanizm", "Taoizm", "Astroloji", "D"),
+                    (4, "İncil hangi dillerde yazılmıştır?", "Yunanca ve İbranice", "Latince ve Fransızca", "İngilizce ve Almanca", "Rusça ve Yunanca", "A"),
+                    (4, "DNA replikasyonu hangi hücre organelinde gerçekleşir?", "Çekirdek", "Mitokondri", "Lizozom", "Ribozom", "A"),
+                    (4, "Hangi savaş Osmanlı’nın Avrupa’daki son büyük yenilgisidir?", "II. Viyana Kuşatması", "Kırım Savaşı", "I. Balkan Savaşı", "II. Balkan Savaşı", "D"),
+                    (4, "Türk kültüründe 'Nazarlık' ne amaçla kullanılır?", "Kötü ruhları uzaklaştırmak", "Hastalık tedavisi", "Zenginlik artırmak", "Sevgi göstermek", "A"),
+                    (4, "Hangi matematikçi modern cebirin kurucusudur?", "Euclid", "René Descartes", "Carl Gauss", "Niels Abel", "B"),
+                    # Seviye 5
+                    (5, "Evrenin Büyük Patlama teorisini destekleyen ilk gözlemsel kanıt neydi?", "Kozmik Mikrodalga Arka Plan Radyasyonu", "Galaksilerin Kırmızıya Kayması", "Süpernova Patlamaları", "Kara Deliklerin Varlığı", "A"),
+                    (5, "Atom bombasının geliştirilmesine öncülük eden proje hangisidir?", "Apollo Projesi", "Manhattan Projesi", "Star Wars Projesi", "Artemis Projesi", "B"),
+                    (5, "Marvel sinematik evreninde 'Kaptan Amerika' karakterini canlandıran oyuncu kimdir?", "Chris Pratt", "Chris Hemsworth", "Chris Evans", "Robert Downey Jr.", "C"),
+                    (5, "Genellikle 'Pop'un Kralı' olarak anılan ve 'Thriller', 'Billie Jean' gibi ikonik hitleriyle tanılan sanatçı kimdir?", "Justin Bieber", "Micheal Jackson", "George Micheal", "The Weekend", "B"),
+                    (5, "Hangi popüler TV dizisinde Targaryen ve Stark hanedanı yer aldı?", "Game of Thrones", "House of the Dragon", "The Walking Dead", "Supernatural", "A"),
+                    (5, "Thor hangi Tanrı'nın oğluydu?", "Odin", "Loki", "Zeus", "Hades", "A"),
+                    (5, "Müzeyyen Senar hangi dönemde ün kazanmıştır?", "1920'ler", "1940'lar", "1960'lar", "1980'ler", "B"),
+                    (5, "İlk Türk kadın romancı kimdir?", "Halide Edip Adıvar", "Fatma Aliye Topuz", "Nezihe Muhiddin", "Afife Jale", "B"),
+                    (5, "Evrenin Büyük Patlama teorisini destekleyen ilk gözlemsel kanıt neydi?", "Kozmik Mikrodalga Arka Plan Radyasyonu", "Galaksilerin Kırmızıya Kayması", "Süpernova Patlamaları", "Kara Deliklerin Varlığı", "A"),
+                    (5, "Atom bombasının geliştirilmesine öncülük eden proje hangisidir?", "Apollo Projesi", "Manhattan Projesi", "Star Wars Projesi", "Artemis Projesi", "B"),
+                    (5, "Dünyanın en büyük çölü hangisidir?", "Sahara", "Gobi", "Antarktika", "Kalahari", "C"),
+                    (5, "Hangisi bir Shakespeare oyunudur?", "Hamlet", "Don Kişot", "Sefiller", "Anna Karenina", "A"),
+                    (5, "Kuantum dolanıklık kavramını ilk kim ortaya atmıştır?", "Albert Einstein", "Erwin Schrödinger", "Niels Bohr", "John Bell", "D"),
+                    (5, "Türkiye'nin en uzun kesintisiz kara sınırı hangi ülkedir?", "İran", "Suriye", "Yunanistan", "Ermenistan", "A"),
+                    (5, "Büyük Patlama’dan sonra ilk oluşan element hangisidir?", "Helyum", "Hidrojen", "Lityum", "Berilyum", "B"),
+                    (5, "İnsan beynindeki sinir hücrelerine ne ad verilir?", "Nöron", "Lenfosit", "Glia", "Osteosit", "A"),
+                    (5, "P vs NP problemi hangi alanın önemli bir sorunudur?", "Fizik", "Bilgisayar Bilimi", "Matematik", "Kimya", "B"),
+                    (5, "Türkiye Cumhuriyeti’nin kurucu lideri kimdir?", "İsmet İnönü", "Mustafa Kemal Atatürk", "Celal Bayar", "Fevzi Çakmak", "B"),
+                    (5, "DNA’da guanin hangi bazla eşleşir?", "Timin", "Adenin", "Sitozin", "Uracil", "C"),
+                    (5, "Hangi filozof ‘Cogito, ergo sum’ (Düşünüyorum, öyleyse varım) demiştir?", "Platon", "Descartes", "Aristoteles", "Nietzsche", "B"),
+                    (5, "Dünya Sağlık Örgütü (WHO) ne zaman kurulmuştur?", "1945", "1948", "1950", "1955", "B"),
+                    (5, "Büyük İskender’in doğduğu şehir neresidir?", "Atina", "Pella", "Sparta", "Korint", "B"),
+                    # Seviye 6
+                    (6, "Görelilik teorisi kim tarafından geliştirilmiştir?", "Isaac Newton", "Albert Einstein", "Stephen Hawking", "Niels Bohr", "B"),
+                    (6, "Dünyadaki en büyük mercan resifi sistemi hangisidir?", "Belize Bariyer Resifi", "Yeni Kaledonya Bariyer Resifi", "Büyük Set Resifi", "Florida Resif Sistemi", "C"),
+                    (6, "On kıtadan oluşan İstiklal Marşı'nın tamamında, bu kelimelerden hangisi diğerlerinden daha az geçer?", "Vatan", "Kan", "Toprak", "Yurt", "C"),
+                    (6, "Hangisi “Dede Korkut Hikayeleri”’ndeki karakterlerden biri değildir?", "Bala Hatun", "Banu Çiçek", "Bamsı Beyrek", "Bayındır Han", "A"),
+                    (6, "Kur'an-ı Kerim'de hangisi üzerine yemin edilmemiştir?", "Deniz", "Güneş", "Arı", "Kalem", "C"),
+                    (6, "Cumhurbaşkanlığı forsu ve armasındaki 16 Türk devleti arasında hangisi yoktur?", "Batı Hun İmparatorluğu", "Harzemşahlar", "Avar İmparatorluğu", "Anadolu Selçuklu Devleti", "D"),
+                    (6, "Herodot'un deneyinde, konuşmayan çocuğun söylediği ilk kelime nedir?", "Ver", "Anne", "Ekmek", "Su", "C"),
+                    (6, "Bu oyunlardan hangisi 'Başlangıç noktasından geçme, 200 $ alma' ifadesi içerir?", "Pac-Man", "Tabu", "Monopoly", "Milyoner", "C"),
+                    (6, "Hangi hayvanın beyni vücut ağırlığına oranla en büyüktür?", "İnsan", "Fare", "Fil", "Karınca", "D"),
+                    (6, "Giza'da kaç tane piramit yapılmıştır?", "2", "3", "4", "5", "B"),
+                    (6, "Görelilik teorisi kim tarafından geliştirilmiştir?", "Isaac Newton", "Albert Einstein", "Stephen Hawking", "Niels Bohr", "B"),
+                    (6, "Dünyadaki en büyük mercan resifi sistemi hangisidir?", "Belize Bariyer Resifi", "Yeni Kaledonya Bariyer Resifi", "Büyük Set Resifi", "Florida Resif Sistemi", "C"),
+                    (6, "İstiklal Marşı kaç kıtadan oluşur?", "10", "8", "11", "9", "A"),
+                    (6, "Dede Korkut hikayeleri hangi döneme aittir?", "İslamiyet öncesi Türk dönemi", "Osmanlı dönemi", "Selçuklu dönemi", "Cumhuriyet dönemi", "A"),
+                    (6, "Kur'an-ı Kerim'de yemin edilmeyen varlık hangisidir?", "Arı", "Deniz", "Güneş", "Kalem", "A"),
+                    (6, "Görelilik teorisini kim geliştirmiştir?", "Isaac Newton", "Albert Einstein", "Nikola Tesla", "Galileo Galilei", "B"),
+                    (6, "Hangisi klasik Osmanlı mimarisinin önemli eserlerinden biri değildir?", "Süleymaniye Camii", "Topkapı Sarayı", "Selimiye Camii", "Anıtkabir", "D"),
+                    (6, "Büyük İskender hangi imparatorluğu yenilgiye uğratmıştır?", "Pers İmparatorluğu", "Roma İmparatorluğu", "Mısır", "Babiller", "A"),
+                    (6, "Türkçedeki 'Mukavemet' kelimesinin anlamı nedir?", "Direnç", "Sabır", "Güçsüzlük", "Uyum", "A"),
+                    (6, "Kuantum fiziğinde Heisenberg’in belirsizlik ilkesi neyi ifade eder?", "Bir parçacığın konumu ve hızının aynı anda kesin olarak bilinememesi", "Bir parçacığın enerjisinin korunması", "Işığın dalga ve parçacık özelliği", "Atom çekirdeğinin kararlılığı", "A"),
+                ]
+                self.cursor.executemany("""
+                    INSERT INTO questions (seviye, soru_metni, secenek_a, secenek_b, secenek_c, secenek_d, dogru_cevap)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                """, questions_to_insert)
+                self.conn.commit()
+                logger.info(f"{len(questions_to_insert)} başlangıç sorusu veritabanına eklendi.")
+            else:
+                logger.info("Sorular tablosu zaten dolu, başlangıç soruları eklenmedi.")
+        except sqlite3.Error as e:
+            logger.error(f"Başlangıç soruları eklenirken hata oluştu: {e}")
+            QMessageBox.critical(self, "Veritabanı Hatası", f"Başlangıç soruları eklenemedi: {e}")
+
+    def load_questions_from_db(self):
+        self.seviye1_sorular = []
+        self.seviye2_sorular = []
+        self.seviye3_sorular = []
+        self.seviye4_sorular = []
+        self.seviye5_sorular = []
+        self.seviye6_sorular = []
+        self.questions = []
+
+        try:
+            self.cursor.execute("SELECT seviye, soru_metni, secenek_a, secenek_b, secenek_c, secenek_d, dogru_cevap FROM questions ORDER BY seviye, RANDOM()")
+            rows = self.cursor.fetchall()
+            for row in rows:
+                seviye, soru_metni, secenek_a, secenek_b, secenek_c, secenek_d, dogru_cevap = row
+                question_dict = {
+                    "soru": soru_metni,
+                    "secenekler": [secenek_a, secenek_b, secenek_c, secenek_d],
+                    "dogru": dogru_cevap
+                }
+                if seviye == 1:
+                    self.seviye1_sorular.append(question_dict)
+                elif seviye == 2:
+                    self.seviye2_sorular.append(question_dict)
+                elif seviye == 3:
+                    self.seviye3_sorular.append(question_dict)
+                elif seviye == 4:
+                    self.seviye4_sorular.append(question_dict)
+                elif seviye == 5:
+                    self.seviye5_sorular.append(question_dict)
+                elif seviye == 6:
+                    self.seviye6_sorular.append(question_dict)
+            
+            logger.info("Sorular veritabanından yüklendi ve seviyelere göre ayrıldı.")
+        except sqlite3.Error as e:
+            logger.error(f"Sorular veritabanından yüklenirken hata oluştu: {e}")
+            QMessageBox.critical(self, "Veritabanı Hatası", f"Sorular yüklenirken bir hata oluştu: {e}")
 
     def init_ui(self):
         self.background_label = QLabel(self)
@@ -532,6 +715,7 @@ class SecondWindow(QWidget):
 
         # Seyirci jokeri
         btn_audience = QPushButton()
+        btn_audience.setObjectName("btn_audience") 
         pixmap_audience = QPixmap("person_joker.png")
         if pixmap_audience.isNull():
             print("Uyarı: 'person_joker.png' ikonu bulunamadı. Varsayılan gri kare kullanılacak.")
@@ -550,6 +734,7 @@ class SecondWindow(QWidget):
 
         # Yarı Yarıya jokeri
         btn_fifty_fifty = QPushButton()
+        btn_fifty_fifty.setObjectName("btn_fifty_fifty")
         pixmap_fifty_fifty = QPixmap("50_joker.png")
         if pixmap_fifty_fifty.isNull():
             print("Uyarı: '50_joker.png' ikonu bulunamadı. Varsayılan gri kare kullanılacak.")
@@ -568,6 +753,7 @@ class SecondWindow(QWidget):
 
         #telefon jokeri 
         self.btn_phone = QPushButton()
+        self.btn_phone.setObjectName("btn_phone") 
         pixmap_phone = QPixmap("phone_call_joker.png")
         if pixmap_phone.isNull():
             print("Uyarı: 'phone_call_joker.png' ikonu bulunamadı. Varsayılan gri kare kullanılacak.")
@@ -660,15 +846,18 @@ class SecondWindow(QWidget):
         event.accept()
 
     def levele_gore_soru_secimi(self):
-        seviye1_secim = random.sample(self.seviye1_sorular, 2)
-        seviye2_secim = random.sample(self.seviye2_sorular, 2)
-        seviye3_secim = random.sample(self.seviye3_sorular, 2)
-        seviye4_secim = random.sample(self.seviye4_sorular, 2)
-        seviye5_secim = random.sample(self.seviye5_sorular, 2)
-        seviye6_secim = random.sample(self.seviye6_sorular, 2)
+       def get_random_questions(question_list, count):
+            return random.sample(question_list, min(count, len(question_list)))
 
-        self.questions = seviye1_secim + seviye2_secim+seviye3_secim+seviye4_secim+seviye5_secim+seviye6_secim
+       seviye1_secim = get_random_questions(self.seviye1_sorular, 2)
+       seviye2_secim = get_random_questions(self.seviye2_sorular, 2)
+       seviye3_secim = get_random_questions(self.seviye3_sorular, 2)
+       seviye4_secim = get_random_questions(self.seviye4_sorular, 2)
+       seviye5_secim = get_random_questions(self.seviye5_sorular, 2)
+       seviye6_secim = get_random_questions(self.seviye6_sorular, 2)
 
+       self.questions = seviye1_secim + seviye2_secim + seviye3_secim + seviye4_secim + seviye5_secim + seviye6_secim
+       logger.info(f"Oyun için toplam {len(self.questions)} soru rastgele seçildi.")
     # o anki sorunun ödülünü vurgulama
     def mevcut_odulu_vurgula(self):
         for i, lbl in enumerate(self.odul_labels):
@@ -707,11 +896,10 @@ class SecondWindow(QWidget):
             self.timer.stop()
             self.progress.hide()
             logger.info(f"Süre sınırı 7. sorudan itibaren kaldırıldı.")
-            self.progress.show()
-            self.time_left = self.time_per_question
-            self.progress.setMaximum(self.time_per_question)
-            self.progress.setValue(self.time_left)
-        else: 
+        else:
+            self.progress.show() 
+            self.progress.setMaximum(self.time_per_question) 
+            self.progress.setValue(self.time_left) 
             self.timer.start(1000)
 
 
@@ -926,9 +1114,9 @@ class SecondWindow(QWidget):
             logger.info(f"Oyun kazanıldı! Kazanılan miktar: {kazanc}.") 
         else:
             if self.current_question_index > 0:
-                 kazanc = self.oduller[self.current_question_index - 1]
+                kazanc = self.oduller[self.current_question_index - 1]
             if self.last_safe_index != -1 and self.current_question_index > self.last_safe_index:
-                 kazanc = self.oduller[self.last_safe_index]
+                kazanc = self.oduller[self.last_safe_index]
             logger.info(f"Oyun kaybedildi. Kazanılan miktar: {kazanc}.")
         self.save_score(kazanc)
         self.reset_game_state()
@@ -985,6 +1173,7 @@ class SecondWindow(QWidget):
             btn.setStyleSheet("background-color:#201f80; hover:background-color: #100f47; color: white; border: none; border-radius: 10px; padding: 15px 25px; font-size: 14pt; font-weight: bold; min-width: 150px;")
         self.progress.show() # Zamanlayıcıyı tekrar göster
         self.mevcut_odulu_vurgula() 
+        self.load_questions_from_db() 
         logger.info("Oyun durumu sıfırlandı.")
 
     # geri çekilme butonu
@@ -1248,6 +1437,7 @@ class MainApp(QStackedWidget):
 
 
         if index == 1:
+            self.second.load_questions_from_db() 
             self.second.levele_gore_soru_secimi()
             self.second.start_question()
         elif index == 0:
